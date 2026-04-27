@@ -97,3 +97,11 @@ Install-Package Microsoft.EntityFrameworkCore.Tools -Version 8.0.0
   
 - CS1002: ; expected
   - Solution: Add semicolon.
+
+=== [Usually in ApplicationDbContext.cs] ===
+
+- CS1061: "Vehicle' does not contain a definition for 'VehicleModels' and no accessible extension method "VehicleModels' accepting a first argument of type "Vehicle' could be found (are you missing a using directive or an
+assembly reference?)
+  - Solution: Check typo, add "using" statement, or add reference to the assembly. Also check if the method is static or not and if it's being called correctly.
+    - Example solutions: public ICollection<Vehicle> Vehicles { get; set; }
+    - Example solutions: public Vehicle Vehicle { get; set; }

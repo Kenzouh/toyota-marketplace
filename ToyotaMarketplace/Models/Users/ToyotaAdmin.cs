@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using ToyotaMarketplace.Models.Vehicles;
 
 namespace ToyotaMarketplace.Models.Users
 {
@@ -14,5 +15,9 @@ namespace ToyotaMarketplace.Models.Users
         
         // Navigation Properties
         public User User { get; set; } // to User
+
+        // One-to-many
+        public ICollection<Vehicle> Vehicles { get; set; } // To Vehicles
+
     }
 }
