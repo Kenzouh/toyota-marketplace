@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts;
-using ToyotaCars.Areas.Data;
+using ToyotaMarketplace.Areas.Data;
+using ToyotaMarketplace.Data.Seeds;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,15 +14,24 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
+// =========== Seeding ===========
 
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+    // Call the Seed() method for each seeeding class to populate the DB with initial data.
+    VehicleTypeSeed.Seed(context); 
+    VehicleModelSeed.Seed(context);
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-}
+    {
+        app.UseExceptionHandler("/Home/Error");
+        // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+        app.UseHsts();
+    }
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

@@ -29,6 +29,12 @@ namespace ToyotaMarketplace.Models.Vehicles
         [Required]
         public string VehicleImg { get; set; }
 
+        [Required]
+        public bool IsElectric { get; set; }
+
+        [Required]
+        public bool IsHybrid { get; set; }
+
         // Navigation Properties
         public ToyotaAdmin ToyotaAdmin { get; set; } // 1
         public VehicleModel VehicleModel { get; set; } // 1
