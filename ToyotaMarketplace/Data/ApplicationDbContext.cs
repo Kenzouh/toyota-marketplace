@@ -2,7 +2,7 @@
 using ToyotaMarketplace.Models.Users;
 using ToyotaMarketplace.Models.Vehicles;
 
-namespace ToyotaCars.Areas.Data
+namespace ToyotaMarketplace.Areas.Data
 {
     public class ApplicationDbContext : DbContext
     {
