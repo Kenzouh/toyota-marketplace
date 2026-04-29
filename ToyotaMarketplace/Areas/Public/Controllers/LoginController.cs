@@ -3,17 +3,10 @@
 namespace ToyotaMarketplace.Areas.Public.Controllers
 {
     [Area("Public")]
-    [Route("")]
-    public class HomeController : Controller
+    public class LoginController : Controller
     {
-        [HttpGet("")]
+        [HttpGet("Login")]
         public IActionResult Index()
-        {
-            return View();
-        }
-
-        [HttpGet("Contact")]
-        public IActionResult ContactUs()
         {
             return View();
         }
