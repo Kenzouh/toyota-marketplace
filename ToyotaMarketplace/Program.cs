@@ -42,6 +42,11 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
+    pattern: "",
+    defaults: new { area = "Public", controller = "Home", action = "Homepage"});
+
+app.MapControllerRoute(
+    name: "default",
     pattern: "{controller}/{action}/{id?}",
     defaults: new { area = "Public", controller = "Home", action = "Homepage" });
 

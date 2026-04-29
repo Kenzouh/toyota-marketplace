@@ -1,0 +1,48 @@
+﻿<nav class="bg-gray-900 text-white">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="flex items-center justify-between h-16">
+
+            <!-- LEFT: Logo -->
+            <div class="flex items-center">
+                <a asp-area="Public" asp-controller="Home" asp-action="Homepage">
+                    <img src="~/images/logo.png" alt="Logo" class="h-10 w-auto">
+                </a>
+            </div>
+
+            <!-- CENTER: Navigation -->
+            <div class="hidden md:flex space-x-10">
+                <a asp-area="Public" asp-controller="Home" asp-action="Homepage"
+                   class="hover:text-gray-300">
+                    Home
+                </a>
+
+                <a asp-area="Public" asp-controller="Marketplace" asp-action="Index"
+                   class="hover:text-gray-300">
+                    Marketplace
+                </a>
+
+                <a asp-area="Public" asp-controller="Home" asp-action="Contact"
+                    class="hover:text-gray-300">
+                    Contact Us
+                </a>
+            </div>
+
+            <!-- RIGHT: Login -->
+            <div class="flex items-center space-x-2">
+                <a asp-area="Public" asp-controller="Account" asp-action="Login"
+                   class="flex items-center gap-2 bg-white text-gray-900 px-4 py-2 rounded-md hover:bg-gray-200">
+
+                    <!-- SVG Icon -->
+                    <img src="~/icons/login.svg"
+                         asp-append-version="true"
+                         class="w-5 h-5"
+                         alt="Login Icon" />
+
+
+                    <span>Login</span>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</nav>

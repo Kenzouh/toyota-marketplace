@@ -1,0 +1,17 @@
+{
+  "name": "toyotamarketplace",
+  "version": "1.0.0",
+  "description": "1. Pick \"MVC\" from the dropdown menu in the top right corner of the project.\r 2. Create \"Areas\" folder.\r 3. Right Click Areas -> Press \"Add\" -> Press \"Area...\" -> Name it \"Public\".\r 4. Repeat step 3, but create \"Admin\" area instead of Public.\r 5. In Program.cs, replace \"app.MapControllerRoute\" block with this block (for default navigation):",
+  "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "tw": "tailwindcss -i ./Styles/input.css -o ./wwwroot/css/site.css --watch" 
+    },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "tailwindcss": "^4.2.4"
+  }
+}

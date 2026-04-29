@@ -1,0 +1,54 @@
+﻿@{
+    var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+    var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
+}
+
+<nav class="bg-red-400 text-white">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="flex items-center justify-between h-16">
+
+            <!-- LEFT: Logo -->
+            <div class="flex items-center">
+                <a asp-area="Public" asp-controller="Home" asp-action="Homepage">
+                    <img src="~/images/logos/Toyota.png" alt="Toyota Logo" class="h-10 w-auto">
+                </a>
+            </div>
+
+            <!-- CENTER: Navigation -->
+            <div class="hidden md:flex space-x-10">
+                <a asp-area="Public" asp-controller="Home" asp-action="Homepage"
+                   class="@(currentController == "Home" && currentAction == "Homepage"
+                    ? "text-yellow-200 pointer-events-none"
+                    : "hover:text-gray-300")">
+                    Home
+                </a>
+
+                
+                <a asp-area="Public" asp-controller="Marketplace" asp-action="Index"
+                   class="@(currentController == "Marketplace" && currentAction == "Index"
+                    ? "text-yellow-200 pointer-events-none"
+                    : "hover:text-gray-300")">
+                    Marketplace
+                </a>
+
+                <a asp-area="Public" asp-controller="Home" asp-action="ContactUs"
+                    class="@(currentController == "Home" && currentAction == "ContactUs"
+                    ? "text-yellow-200 pointer-events-none"
+                    : "hover:text-gray-300")">
+                    Contact Us
+                </a>
+            </div>
+
+            <!-- RIGHT: Login -->
+            <div class="flex items-center space-x-2">
+                <a asp-area="Public" asp-controller="Login" asp-action="Index"
+                   class="flex items-center gap-2 bg-white text-gray-900 px-4 py-2 rounded-md hover:bg-gray-200">
+
+                    <!-- SVG Icon -->
+                    <img src="~/icons/login-icon.svg" class="w-5 h-5" /> Login
+                </a>
+            </div>
+
+        </div>
+    </div>
+</nav>

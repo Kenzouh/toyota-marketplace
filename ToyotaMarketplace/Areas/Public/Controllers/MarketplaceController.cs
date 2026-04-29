@@ -3,17 +3,15 @@
 namespace ToyotaMarketplace.Areas.Public.Controllers
 {
     [Area("Public")]
-    [Route("")]
-    public class HomeController : Controller
+    public class MarketplaceController : Controller
     {
-        [HttpGet("")]
+        [HttpGet("Marketplace")] // This route will be /Marketplace instead of /Marketplace/Index
         public IActionResult Index()
         {
             return View();
         }
 
-        [HttpGet("Contact")]
-        public IActionResult ContactUs()
+        public IActionResult Details()
         {
             return View();
         }
