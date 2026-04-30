@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ToyotaMarketplace.Areas.Data;
 
@@ -11,9 +12,11 @@ using ToyotaMarketplace.Areas.Data;
 namespace ToyotaMarketplace.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260430063903_AddEmailToUsersTable")]
+    partial class AddEmailToUsersTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -130,9 +133,6 @@ namespace ToyotaMarketplace.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VehicleColorId"));
 
-                    b.Property<int>("VehicleColorCategoryId")
-                        .HasColumnType("int");
-
                     b.Property<string>("VehicleColorHexadecimal")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -143,26 +143,7 @@ namespace ToyotaMarketplace.Migrations
 
                     b.HasKey("VehicleColorId");
 
-                    b.HasIndex("VehicleColorCategoryId");
-
                     b.ToTable("VehicleColors");
-                });
-
-            modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.VehicleColorCategory", b =>
-                {
-                    b.Property<int>("VehicleColorCategoryId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VehicleColorCategoryId"));
-
-                    b.Property<string>("VehicleColorCategoryName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("VehicleColorCategoryId");
-
-                    b.ToTable("VehicleColorCategories");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.VehicleModel", b =>
@@ -245,17 +226,6 @@ namespace ToyotaMarketplace.Migrations
                     b.Navigation("VehicleModel");
                 });
 
-            modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.VehicleColor", b =>
-                {
-                    b.HasOne("ToyotaMarketplace.Models.Vehicles.VehicleColorCategory", "VehicleColorCategory")
-                        .WithMany("VehicleColors")
-                        .HasForeignKey("VehicleColorCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("VehicleColorCategory");
-                });
-
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.VehicleModel", b =>
                 {
                     b.HasOne("ToyotaMarketplace.Models.Vehicles.VehicleType", "VehicleType")
@@ -281,11 +251,6 @@ namespace ToyotaMarketplace.Migrations
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.VehicleColor", b =>
                 {
                     b.Navigation("Vehicles");
-                });
-
-            modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.VehicleColorCategory", b =>
-                {
-                    b.Navigation("VehicleColors");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.VehicleModel", b =>
