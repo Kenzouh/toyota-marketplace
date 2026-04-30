@@ -23,6 +23,8 @@ using (var scope = app.Services.CreateScope())
     // Call the Seed() method for each seeeding class to populate the DB with initial data.
     VehicleTypeSeed.Seed(context); 
     VehicleModelSeed.Seed(context);
+    VehicleColorCategorySeed.Seed(context);
+    VehicleColorSeed.Seed(context);
 }
 
 // Configure the HTTP request pipeline.

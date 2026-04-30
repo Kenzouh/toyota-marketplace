@@ -20,7 +20,7 @@ namespace ToyotaMarketplace.Areas.Data
         public DbSet<VehicleColor> VehicleColors { get; set; }
         public DbSet<VehicleModel> VehicleModels { get; set; }
         public DbSet<VehicleType> VehicleTypes { get; set; }
-
+        public DbSet<VehicleColorCategory> VehicleColorCategories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -61,6 +61,11 @@ namespace ToyotaMarketplace.Areas.Data
                 .WithMany(vt => vt.VehicleModels)
                 .HasForeignKey(vm => vm.VehicleTypeId);
 
+            // N:1 VehicleColor -> VehicleColorCategory
+            modelBuilder.Entity<VehicleColor>()
+               .HasOne(vc => vc.VehicleColorCategory)
+               .WithMany(vcc => vcc.VehicleColors)
+               .HasForeignKey(vc => vc.VehicleColorCategoryId);
         }
 
     }
