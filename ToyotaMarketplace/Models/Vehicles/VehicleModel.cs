@@ -22,7 +22,7 @@ namespace ToyotaMarketplace.Models.Vehicles
 
         /*
             Visualization:
-            Vehicles >|-----| VehicleModels
+            Vehicles >|-----|| VehicleModels
         */
     }
 }

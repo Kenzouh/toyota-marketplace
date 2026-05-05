@@ -17,6 +17,10 @@ namespace ToyotaMarketplace.Models.Vehicles
         [ForeignKey("VehicleColor")]
         public int VehicleColorId { get; set; }
 
+        //[Required]
+        //[ForeignKey("VehicleSpec")]
+        //public int VehicleSpecId { get; set; }
+
         [Required]
         [ForeignKey("ToyotaAdmin")]
         public int ToyotaAdminId { get; set; }
@@ -35,16 +39,23 @@ namespace ToyotaMarketplace.Models.Vehicles
         [Required]
         public bool IsHybrid { get; set; }
 
+        [Required]
+        public DateTime DatePosted { get; set; }
+
         // Navigation Properties
         public ToyotaAdmin ToyotaAdmin { get; set; } // 1
         public VehicleModel VehicleModel { get; set; } // 1
         public VehicleColor VehicleColor { get; set; } // 1
 
+        // public VehicleSpec VehicleSpec { get; set; } // 1-to-1
+
         /*
             Visualization:
-            Vehicles >|-----| ToyotaAdmin
-            Vehicles >|-----| VehicleModel
-            Vehicles >|-----| VehicleColor
+            Vehicles >|-----|| ToyotaAdmin
+            Vehicles >|-----|| VehicleModel
+            Vehicles >|-----|| VehicleColor
+
+            Note: it's only | if nullable like "public int? ToyotaAdminId { get; set; }"
         */
     }
 }
