@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ToyotaMarketplace.Areas.Data;
 
@@ -11,9 +12,11 @@ using ToyotaMarketplace.Areas.Data;
 namespace ToyotaMarketplace.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260505054730_AddDriveModesTable")]
+    partial class AddDriveModesTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -77,40 +80,6 @@ namespace ToyotaMarketplace.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.BatteryType", b =>
-                {
-                    b.Property<int>("BatteryTypeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BatteryTypeId"));
-
-                    b.Property<string>("BatteryName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("BatteryTypeId");
-
-                    b.ToTable("BatteryTypes");
-                });
-
-            modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.BrakeType", b =>
-                {
-                    b.Property<int>("BrakeTypeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BrakeTypeId"));
-
-                    b.Property<string>("BrakeTypeName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("BrakeTypeId");
-
-                    b.ToTable("BrakeTypes");
-                });
-
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.DriveMode", b =>
                 {
                     b.Property<int>("DriveModeId")
@@ -126,91 +95,6 @@ namespace ToyotaMarketplace.Migrations
                     b.HasKey("DriveModeId");
 
                     b.ToTable("DriveModes");
-                });
-
-            modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.FuelType", b =>
-                {
-                    b.Property<int>("FuelTypeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FuelTypeId"));
-
-                    b.Property<string>("FuelName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("FuelTypeId");
-
-                    b.ToTable("FuelTypes");
-                });
-
-            modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.PowerSteeringType", b =>
-                {
-                    b.Property<int>("PowerSteeringTypeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PowerSteeringTypeId"));
-
-                    b.Property<string>("PowerSteeringTypeName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("PowerSteeringTypeId");
-
-                    b.ToTable("PowerSteeringTypes");
-                });
-
-            modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.SteeringSystem", b =>
-                {
-                    b.Property<int>("SteeringSystemId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SteeringSystemId"));
-
-                    b.Property<string>("SteeringSystemName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("SteeringSystemId");
-
-                    b.ToTable("SteeringSystems");
-                });
-
-            modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.SteeringType", b =>
-                {
-                    b.Property<int>("SteeringTypeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SteeringTypeId"));
-
-                    b.Property<string>("SteeringTypeName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("SteeringTypeId");
-
-                    b.ToTable("SteeringTypes");
-                });
-
-            modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.TransmissionType", b =>
-                {
-                    b.Property<int>("TransmissionTypeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TransmissionTypeId"));
-
-                    b.Property<string>("TransmissionName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("TransmissionTypeId");
-
-                    b.ToTable("TransmissionTypes");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Vehicle", b =>

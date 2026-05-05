@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ToyotaMarketplace.Models.Users;
 using ToyotaMarketplace.Models.Vehicles;
+using ToyotaMarketplace.Models.Vehicles.Specs;
 
 namespace ToyotaMarketplace.Areas.Data
 {
@@ -10,6 +11,7 @@ namespace ToyotaMarketplace.Areas.Data
 
         // DB sets of each model (for DB)
         // Template: publicDbSet<Model/.cs file> TblName in DB { get; set;}
+        // If DbSets aren't declared, when you create a migration, you don't create anything.
         
         // Users Category
         public DbSet<User> Users { get; set; }
@@ -21,6 +23,18 @@ namespace ToyotaMarketplace.Areas.Data
         public DbSet<VehicleModel> VehicleModels { get; set; }
         public DbSet<VehicleType> VehicleTypes { get; set; }
         public DbSet<VehicleColorCategory> VehicleColorCategories { get; set; }
+
+        // Vehicle Specifications
+        public DbSet<DriveMode> DriveModes { get; set; }
+
+        public DbSet<TransmissionType> TransmissionTypes { get; set; }
+        public DbSet<BatteryType> BatteryTypes { get; set; }
+        public DbSet<SteeringSystem> SteeringSystems { get; set; }
+        public DbSet<SteeringType> SteeringTypes { get; set; }
+        public DbSet<PowerSteeringType> PowerSteeringTypes { get; set; }
+        public DbSet<BrakeType> BrakeTypes { get; set; }
+        public DbSet<FuelType> FuelTypes { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -66,6 +80,14 @@ namespace ToyotaMarketplace.Areas.Data
                .HasOne(vc => vc.VehicleColorCategory)
                .WithMany(vcc => vcc.VehicleColors)
                .HasForeignKey(vc => vc.VehicleColorCategoryId);
+
+
+            // ------------------------------------------------------
+
+
+
+
+
         }
 
     }
