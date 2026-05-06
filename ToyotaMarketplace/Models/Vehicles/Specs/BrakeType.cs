@@ -9,6 +9,12 @@ namespace ToyotaMarketplace.Models.Vehicles.Specs
         public int BrakeTypeId { get; set; }
 
         [Required]
-        public string BrakeTypeName { get; set; }
+        public string FrontBrake { get; set; }
+
+        [Required]
+        public string RearBrake { get; set; }
+
+        // Navigation Property
+        public ICollection<VehicleTechnical> VehicleTechnicals { get; set; }
     }
 }

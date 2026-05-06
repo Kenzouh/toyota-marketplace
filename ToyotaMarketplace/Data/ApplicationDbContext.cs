@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Security.Cryptography;
+using Microsoft.EntityFrameworkCore;
 using ToyotaMarketplace.Models.Users;
 using ToyotaMarketplace.Models.Vehicles;
 using ToyotaMarketplace.Models.Vehicles.Specs;
@@ -25,7 +26,11 @@ namespace ToyotaMarketplace.Areas.Data
         public DbSet<VehicleColorCategory> VehicleColorCategories { get; set; }
 
         // Vehicle Specifications
+        public DbSet<VehicleSpec> VehicleSpecs { get; set; }
+
         public DbSet<DriveMode> DriveModes { get; set; }
+
+        public DbSet<VehiclePerformanceDriveMode> VehiclePerformanceDriveModes { get; set; } // Join Table
 
         public DbSet<TransmissionType> TransmissionTypes { get; set; }
         public DbSet<BatteryType> BatteryTypes { get; set; }
@@ -35,7 +40,12 @@ namespace ToyotaMarketplace.Areas.Data
         public DbSet<BrakeType> BrakeTypes { get; set; }
         public DbSet<FuelType> FuelTypes { get; set; }
 
+        public DbSet<VehiclePerformance> VehiclePerformances { get; set; }
+        public DbSet<VehicleTechnical> VehicleTechnicals { get; set; }
+        public DbSet<VehicleDimensionFuel> VehicleDimensionFuels { get; set; }
+        public DbSet<VehicleFeature> VehicleFeatures { get; set; }
 
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -84,11 +94,92 @@ namespace ToyotaMarketplace.Areas.Data
 
             // ------------------------------------------------------
 
+            // N:N (Explicit Join)
+            modelBuilder.Entity<VehiclePerformanceDriveMode>()
+                .HasKey(vpdm => new { vpdm.PerformanceId, vpdm.DriveModeId });
 
+            // 1:N VehiclePerformanceDriveMode -> VehiclePerformance
+            modelBuilder.Entity<VehiclePerformanceDriveMode>()
+                .HasOne(vpdm => vpdm.VehiclePerformance)
+                .WithMany(vp => vp.VehiclePerformanceDriveModes)
+                .HasForeignKey(vpdm => vpdm.PerformanceId);
 
+            // 1:N VehiclePerformanceDriveMode -> DriveMode
+            modelBuilder.Entity<VehiclePerformanceDriveMode>()
+                .HasOne(vpdm => vpdm.DriveMode)
+                .WithMany(dm => dm.VehiclePerformanceDriveModes)
+                .HasForeignKey(vpdm => vpdm.DriveModeId);
 
+            // VehicleSpec -> VehiclePerformance (optional FK)
+            modelBuilder.Entity<VehicleSpec>()
+                .HasOne(vs => vs.VehiclePerformance)
+                .WithOne(vp => vp.VehicleSpec)
+                .HasForeignKey<VehicleSpec>(vs => vs.PerformanceId)
+                .OnDelete(DeleteBehavior.Restrict); // Prevents cascade issues.
 
+            // ---
+
+            // 1:1 Vehicle -> VehicleSpec
+            modelBuilder.Entity<Vehicle>()
+                .HasOne(v => v.VehicleSpec)
+                .WithOne(vs => vs.Vehicle)
+                .HasForeignKey<VehicleSpec>(v => v.VehicleSpecId);
+
+            // 1:1 VehicleSpec -> VehiclePerformance
+            modelBuilder.Entity<VehicleSpec>()
+                .HasOne(vs => vs.VehiclePerformance)
+                .WithOne(vp => vp.VehicleSpec)
+                .HasForeignKey<VehiclePerformance>(vs => vs.PerformanceId);
+
+            // 1:1 VehicleSpec -> VehicleTechnical
+            modelBuilder.Entity<VehicleSpec>()
+                .HasOne(vs => vs.VehicleTechnical)
+                .WithOne(vt => vt.VehicleSpec)
+                .HasForeignKey<VehicleTechnical>(vs => vs.TechnicalId);
+
+            // 1:1 VehicleSpec -> VehicleDimensionFuel
+            modelBuilder.Entity<VehicleSpec>()
+                .HasOne(vs => vs.VehicleDimensionFuel)
+                .WithOne(vdf => vdf.VehicleSpec)
+                .HasForeignKey<VehicleDimensionFuel>(vs => vs.DimensionFuelId);
+
+            // 1:1 VehicleSpec -> VehicleFeature
+            modelBuilder.Entity<VehicleSpec>()
+                .HasOne(vs => vs.VehicleFeature)
+                .WithOne(vf => vf.VehicleSpec)
+                .HasForeignKey<VehicleFeature>(vs => vs.FeatureId);
+
+            // ------------------------------------------------------
+
+            // 1:N VehicleTechnical -> BatteryType
+            modelBuilder.Entity<VehicleTechnical>()
+                .HasOne(vt => vt.BatteryType)
+                .WithMany(bt => bt.VehicleTechnicals)
+                .HasForeignKey(vt => vt.TechnicalId);
+
+            // 1:N VehicleTechnical -> SteeringSystem
+            modelBuilder.Entity<VehicleTechnical>()
+                .HasOne(vt => vt.SteeringSystem)
+                .WithMany(ss => ss.VehicleTechnicals)
+                .HasForeignKey(vt => vt.SteeringSystemId);
+
+            // 1:N VehicleTechnical -> SteeringType
+            modelBuilder.Entity<VehicleTechnical>()
+                .HasOne(vt => vt.SteeringType)
+                .WithMany(st => st.VehicleTechnicals)
+                .HasForeignKey(vt => vt.SteeringTypeId);
+
+            // 1:N VehicleTechnical -> PowerSteeringType
+            modelBuilder.Entity<VehicleTechnical>()
+                .HasOne(vt => vt.PowerSteeringType)
+                .WithMany(pst => pst.VehicleTechnicals)
+                .HasForeignKey(vt => vt.PowerSteeringTypeId);
+
+            // 1:N VehicleTechnical -> BrakeType
+            modelBuilder.Entity<VehicleTechnical>()
+                .HasOne(vt => vt.BrakeType)
+                .WithMany(bt => bt.VehicleTechnicals)
+                .HasForeignKey(vt => vt.BrakeTypeId);
         }
-
     }
 }
