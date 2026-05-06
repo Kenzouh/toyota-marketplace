@@ -9,5 +9,8 @@ namespace ToyotaMarketplace.Models.Vehicles.Specs
 
         [Required]
         public string BatteryName { get; set; }
+
+        // Navigation Property
+        public ICollection<VehicleTechnical> VehicleTechnicals { get; set; }
     }
 }

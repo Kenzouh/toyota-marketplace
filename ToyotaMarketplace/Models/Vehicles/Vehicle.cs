@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using ToyotaMarketplace.Models.Users;
+using ToyotaMarketplace.Models.Vehicles.Specs;
 
 namespace ToyotaMarketplace.Models.Vehicles
 {
@@ -46,6 +47,8 @@ namespace ToyotaMarketplace.Models.Vehicles
         public ToyotaAdmin ToyotaAdmin { get; set; } // 1
         public VehicleModel VehicleModel { get; set; } // 1
         public VehicleColor VehicleColor { get; set; } // 1
+
+        public VehicleSpec VehicleSpec { get; set; }
 
         // public VehicleSpec VehicleSpec { get; set; } // 1-to-1
 

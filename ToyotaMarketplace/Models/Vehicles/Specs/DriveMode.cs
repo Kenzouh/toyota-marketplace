@@ -9,5 +9,8 @@ namespace ToyotaMarketplace.Models.Vehicles.Specs
 
         [Required]
         public string ModeName { get; set; }
+
+        // Navigation Property
+        public ICollection<VehiclePerformanceDriveMode> VehiclePerformanceDriveModes { get; set; }
     }
 }

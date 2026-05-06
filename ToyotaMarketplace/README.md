@@ -216,3 +216,9 @@ assembly reference?)
 - CS7036: There is no argument given that corresponds to the required parameter "context' of "VehicleModelSeed. Seed[ApplicationDbContext)"
   - Solution: add an argument value.
     e.g., from `VehicleModelSeed.Seed();` to `VehicleModelSeed.Seed(context);`.
+
+- System.InvalidOperationException: 'The entity type 'VehiclePerformanceDriveMode' requires a primary key to be defined. If you intended to use a keyless entity type, call 'HasNoKey' in 'OnModelCreating'. For more information on keyless entity types, see https://go.microsoft.com/fwlink/?linkid=2141943.'
+  - Solution: add in `DriveMode.cs` and in `VehiclePerformance.cs`
+    '''
+    public ICollection<VehiclePerformanceDriveMode> VehiclePerformanceDriveModes { get; set; } = new List<VehiclePerformanceDriveMode>();
+    '''
