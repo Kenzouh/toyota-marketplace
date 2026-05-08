@@ -187,15 +187,35 @@ Reference link: https://betterstack.com/community/questions/gitignore-vs-project
 Install-Package Microsoft.EntityFrameworkCore -Version 8.0.0
 Install-Package Microsoft.EntityFrameworkCore.SqlServer -Version 8.0.0
 Install-Package Microsoft.EntityFrameworkCore.Tools -Version 8.0.0
+Install-Package BCrypt.Net-Next
 
 # Types of errors:
 
 - CS0103: The name '' does not exist in the current context
   - Solution: Check typo or add "using" statement.
-  
+
+- CS0161: 'LoginController.Logout()': not all code paths return a value a value.
+  - Solution: add a return statement (e.g., return RedirectToAction("Index", "Home", new { area = "Public" });).
+
 - CS0246: The type or namespace name '' could not be found (are you missing a using directive or an assembly reference?)
   - Solution: Check typo, add "using" statement, or add reference to the assembly.
-  
+
+- CS0670: Field cannot have void type.
+
+    '''
+    private static void User CreateUser(string Username, string UserFirstName, string UserLastName, 
+                                        string Email, string plainPassword, DateTime RegisterDate)
+    { 
+    '''
+
+  - Solution: Remove the "void" keyword and replace it with the return type of the method, which is "User" in this case.
+
+    '''
+    private static User CreateUser(string Username, string UserFirstName, string UserLastName, 
+                                        string Email, string plainPassword, DateTime RegisterDate)
+    { 
+    '''
+
 - CS1002: ; expected
   - Solution: Add semicolon.
 

@@ -6,6 +6,8 @@
 
     <title>ToyotaMarketplace</title>
 
+    <!-- For custom CSS: validation styling -->
+    <link href="~/css/custom.css" rel="stylesheet" />
     <!-- Tailwind CSS -->
     <link href="~/css/site.css" rel="stylesheet" />
 </head>
@@ -18,5 +20,6 @@
         @RenderBody()
     </div>
 
+    @RenderSection("Scripts", required: false)
 </body>
 </html>
