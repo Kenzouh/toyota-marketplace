@@ -41,12 +41,31 @@
 
             <!-- RIGHT: Login -->
             <div class="flex items-center space-x-2">
-                <a asp-area="Public" asp-controller="Login" asp-action="Index"
-                   class="flex items-center gap-2 bg-white text-gray-900 px-4 py-2 rounded-md hover:bg-gray-200">
 
-                    <!-- SVG Icon -->
-                    <img src="~/icons/login-icon.svg" class="w-5 h-5" /> Login
-                </a>
+                @if (User.Identity != null && User.Identity.IsAuthenticated)
+                {
+                    <!-- Log out -->
+                    <form asp-area="Public" asp-controller="Login" asp-action="Logout" method="post">
+                        @Html.AntiForgeryToken()
+
+                        <button type="submit"
+                                class="flex items-center gap-2 bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-800">
+
+                            <img src="~/icons/logout-icon.svg" class="w-5 h-5 text-white"/> Log out
+                        </button>
+
+                    </form>
+                }
+
+                else
+                {
+                    <a asp-area="Public" asp-controller="Login" asp-action="Index"
+                       class="flex items-center gap-2 bg-white text-gray-900 px-4 py-2 rounded-md hover:bg-gray-200">
+
+                        <!-- SVG Icon -->
+                        <img src="~/icons/login-icon.svg" class="w-5 h-5" /> Login
+                    </a>
+                }
             </div>
 
         </div>

@@ -1,0 +1,22 @@
+﻿/* ASP.NET VALIDATION UI */
+.field-validation-error {
+    color: #f87171;
+    font-size: 0.875rem;
+}
+
+.validation-summary-errors {
+    color: #f87171 !important;
+}
+
+.input-validation-error {
+    border-color: #ef4444 !important;
+    box-shadow: 0 0 0 1px #ef4444 !important;
+}
+
+/* Focused: Thicker ring */
+.input-validation-error:focus {
+    border-color: #ef4444 !important;
+    /* thicker "focus ring" */
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.6) !important;
+}
+
