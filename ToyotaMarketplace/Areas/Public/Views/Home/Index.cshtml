@@ -2,6 +2,98 @@
     Layout = "~/Areas/Public/Views/Shared/_Layout.cshtml";
 }
 
+<div class="flex gap-6">
+
+    <!-- Left part: Sidebar -->
+    <partial name="_SidebarFilters" />
+
+    <!-- Right part: Main Content -->
+    <div class="flex-1">
+
+        <!-- Top Controls -->
+        <div class="flex justify-between items-center mb-6">
+
+            <div>
+                @if (User.Identity != null && User.Identity.IsAuthenticated)
+                {
+                    <!-- Add Vehicle -->
+                    <a asp-area="Admin" asp-controller="Vehicle" asp-action="AddVehicle"
+                    class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700">
+                        + Add Vehicle
+                    </a>
+                }
+            </div>
+
+            <!-- Sort Dropdown -->
+            <div class="flex">
+
+                <h1 class="mr-4">Sort By:</h1>
+
+                <select class="border-2 rounded">
+                
+                    <option>Vehicle Name</option>
+                    <option>Starting Price</option>
+                </select>
+
+            </div>
+        </div>
+
+        <!-- Vehicle Cards Section -->
+        <div class="space-y-6">
+
+            <!-- Cards Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+
+                <!-- Card -->
+                <div class="bg-white rounded-lg shadow p-4">
+
+                    <!-- Logos Row -->
+                    <div class="flex justify-end items-center gap-2 bg-white rounded-lg ">
+                        <img src="~/images/logos/HEV.png" class="h-4 object-contain" />
+                        <img src="~/images/logos/Toyota.png" class="h-4 object-contain" />
+                    </div>
+
+                    <!-- Car Image -->
+                    <img src="~/images/vehicles/sample-car.jpg" class="w-full h-40 object-cover rounded mb-3" />
+
+                    <hr />
+                    <!-- Car Info -->
+                    <h3 class="text-lg font-bold">Toyota Fortuner</h3>
+                    <h4 class="text-gray-400 mb-3">Starts at ₱1,800,000</h4>
+
+                    <div class="flex justify-between">
+                        <a asp-area="Public" asp-controller="Vehicle" asp-action="ViewVehicle" class="text-blue-500">View</a>
+
+                        @if (User.Identity != null && User.Identity.IsAuthenticated)
+                        {
+                            <a asp-area="Admin" asp-controller="Vehicle" asp-action="EditVehicle" class="text-green-500">Edit</a>
+                        }
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
 <h1 class="text-red-500 text-4xl font-bold">
     Working test
 </h1>
+
+@section Scripts {
+    <script>
+        const range = document.getElementById("priceRange");
+        const minInput = document.getElementById("minPrice");
+        const maxInput = document.getElementById("maxPrice");
+
+        range.addEventListener("input", () => {
+            minInput.value = range.value;
+        });
+
+        minInput.addEventListener("input", () => {
+            range.value = minInput.value;
+        });
+    </script>
+}
