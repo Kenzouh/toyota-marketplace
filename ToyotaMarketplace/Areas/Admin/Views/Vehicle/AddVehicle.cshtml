@@ -2,4 +2,562 @@
 	Layout = "_Layout";
 }
 
-<h1>Add Vehicle Page</h1>
+<h1>Add Vehicle Page</h1>	
+
+@{
+    Layout = "_Layout";
+}
+
+<div class="min-h-screen bg-zinc-100 py-10">
+
+    <div class="mx-auto max-w-7xl px-6">
+
+        <!-- PAGE HEADER -->
+        <div class="mb-8">
+
+            <div class="flex items-center gap-4">
+
+                <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-black shadow-lg">
+
+                    <img src="~/icons/car.svg"
+                         alt="vehicle"
+                         class="h-7 w-7 invert" />
+
+                </div>
+
+                <div>
+
+                    <h1 class="text-4xl font-black tracking-tight text-zinc-900">
+                        Add Vehicle
+                    </h1>
+
+                    <p class="mt-1 text-zinc-500">
+                        Create and manage complete vehicle specifications and features.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <form method="post"
+              enctype="multipart/form-data"
+              class="space-y-8">
+
+            <!-- ================================================== Vehicle Hero Section ================================================== -->
+
+            <section class="overflow-hidden rounded-[2rem] bg-white shadow-xl">
+
+                <div class="border-b border-zinc-200 bg-black px-8 py-6">
+
+                    <h2 class="text-3xl font-black text-white">
+                        Vehicle Hero Section
+                    </h2>
+
+                    <p class="mt-2 text-sm text-zinc-300">
+                        Main vehicle identity, branding, pricing, and appearance.
+                    </p>
+
+                </div>
+
+                <div class="grid gap-6 p-8 lg:grid-cols-2">
+
+                    <!-- Vehicle Image -->
+                    <div class="space-y-2">
+
+                        <label class="text-sm font-bold uppercase tracking-wide text-zinc-500">
+                            Vehicle Images
+                        </label>
+
+                        <div class="rounded-2xl border-2 border-dashed border-zinc-300 bg-zinc-50 p-8 text-center transition hover:border-red-500 hover:bg-red-50">
+
+                            <input type="file"
+                                   multiple
+                                   class="w-full text-sm text-zinc-600" />
+
+                            <p class="mt-3 text-sm text-zinc-400">
+                                Upload multiple vehicle images
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Right Side -->
+                    <div class="grid gap-5">
+
+                        <!-- Vehicle Name -->
+                        <div>
+
+                            <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
+                                Vehicle Name
+                            </label>
+
+                            <input type="text"
+                                   placeholder="Toyota Vios"
+                                   class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none transition focus:border-red-500 focus:ring-4 focus:ring-red-100" />
+
+                        </div>
+
+                        <!-- Vehicle Type + Logos -->
+                        <div class="grid gap-5 md:grid-cols-2">
+
+                            <div>
+
+                                <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
+                                    Vehicle Type
+                                </label>
+
+                                <select class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none transition focus:border-red-500 focus:ring-4 focus:ring-red-100">
+
+                                    <option>Select Vehicle Type</option>
+                                    <option>Gazoo Racing</option>
+                                    <option>SUV</option>
+                                    <option>Sedan</option>
+
+                                </select>
+
+                            </div>
+
+                            <div>
+
+                                <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
+                                    Logos
+                                </label>
+
+                                <select class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none transition focus:border-red-500 focus:ring-4 focus:ring-red-100">
+
+                                    <option>Select Logo</option>
+                                    <option>Hybrid</option>
+                                    <option>Electric</option>
+                                    <option>GR</option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                        <!-- Wheels + SRP -->
+                        <div class="grid gap-5 md:grid-cols-2">
+
+                            <div>
+
+                                <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
+                                    Wheels
+                                </label>
+
+                                <input type="number"
+                                       placeholder="4"
+                                       class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none transition focus:border-red-500 focus:ring-4 focus:ring-red-100" />
+
+                            </div>
+
+                            <div>
+
+                                <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
+                                    SRP
+                                </label>
+
+                                <input type="number"
+                                       step="0.01"
+                                       placeholder="1250000"
+                                       class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none transition focus:border-red-500 focus:ring-4 focus:ring-red-100" />
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Colors -->
+                    <div class="lg:col-span-2">
+
+                        <label class="mb-3 block text-sm font-bold uppercase tracking-wide text-zinc-500">
+                            Available Colors
+                        </label>
+
+                        <div class="flex flex-wrap gap-4 rounded-2xl border border-zinc-200 bg-zinc-50 p-5">
+
+                            <label class="flex items-center gap-2">
+                                <input type="checkbox" />
+                                <span>Black</span>
+                            </label>
+
+                            <label class="flex items-center gap-2">
+                                <input type="checkbox" />
+                                <span>White</span>
+                            </label>
+
+                            <label class="flex items-center gap-2">
+                                <input type="checkbox" />
+                                <span>Red</span>
+                            </label>
+
+                            <label class="flex items-center gap-2">
+                                <input type="checkbox" />
+                                <span>Blue</span>
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Disclaimer -->
+                    <div class="lg:col-span-2">
+
+                        <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
+                            Disclaimer
+                        </label>
+
+                        <textarea rows="4"
+                                  placeholder="Actual unit specifications may vary depending on region and model variant."
+                                  class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none transition focus:border-red-500 focus:ring-4 focus:ring-red-100"></textarea>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ================================================== Performance ================================================== -->
+
+            <section class="overflow-hidden rounded-[2rem] bg-white shadow-xl">
+
+                <div class="border-b border-zinc-200 bg-black px-8 py-6">
+
+                    <h2 class="text-3xl font-black text-white">
+                        Performance
+                    </h2>
+
+                </div>
+
+                <div class="grid gap-5 p-8 md:grid-cols-2">
+
+                    <div>
+                        <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
+                            Engine
+                        </label>
+
+                        <input type="text"
+                               class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100" />
+                    </div>
+
+                    <div>
+                        <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
+                            Transmission
+                        </label>
+
+                        <select class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100">
+
+                            <option>Select Transmission</option>
+                            <option>CVT</option>
+                            <option>Automatic</option>
+                            <option>Manual</option>
+
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
+                            Drivetrain
+                        </label>
+
+                        <input type="text"
+                               class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100" />
+                    </div>
+
+                    <div>
+                        <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
+                            Chassis
+                        </label>
+
+                        <input type="text"
+                               class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100" />
+                    </div>
+
+                    <div class="md:col-span-2">
+
+                        <label class="mb-3 block text-sm font-bold uppercase tracking-wide text-zinc-500">
+                            Drive Modes
+                        </label>
+
+                        <div class="flex flex-wrap gap-4 rounded-2xl border border-zinc-200 bg-zinc-50 p-5">
+
+                            <label class="flex items-center gap-2">
+                                <input type="checkbox" />
+                                <span>Eco</span>
+                            </label>
+
+                            <label class="flex items-center gap-2">
+                                <input type="checkbox" />
+                                <span>Normal</span>
+                            </label>
+
+                            <label class="flex items-center gap-2">
+                                <input type="checkbox" />
+                                <span>Sport</span>
+                            </label>
+
+                            <label class="flex items-center gap-2">
+                                <input type="checkbox" />
+                                <span>EV</span>
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ================================================== Technical Specifications ================================================== -->
+
+            <section class="overflow-hidden rounded-[2rem] bg-white shadow-xl">
+
+                <div class="border-b border-zinc-200 bg-black px-8 py-6">
+
+                    <h2 class="text-3xl font-black text-white">
+                        Technical Specifications
+                    </h2>
+
+                </div>
+
+                <div class="grid gap-5 p-8 md:grid-cols-2">
+
+                    <input type="text" placeholder="Suspension" class="rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100" />
+
+                    <input type="text" placeholder="Steering System Name" class="rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100" />
+
+                    <input type="text" placeholder="Steering Type Name" class="rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100" />
+
+                    <select class="rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100">
+
+                        <option>Power Steering Type</option>
+                        <option>Electronic</option>
+                        <option>Hydraulic</option>
+
+                    </select>
+
+                    <input type="text" placeholder="Front Brake" class="rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100" />
+
+                    <input type="text" placeholder="Rear Brake" class="rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100" />
+
+                    <input type="number" placeholder="Minimum Turning Radius" class="rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100" />
+
+                    <select class="rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100">
+
+                        <option>Battery Type</option>
+                        <option>Lithium Iron</option>
+                        <option>Nickel Metal</option>
+
+                    </select>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ================================================== Dimensions & Capacity ================================================== -->
+
+            <section class="overflow-hidden rounded-[2rem] bg-white shadow-xl">
+
+                <div class="border-b border-zinc-200 bg-black px-8 py-6">
+
+                    <h2 class="text-3xl font-black text-white">
+                        Dimensions & Capacity
+                    </h2>
+
+                </div>
+
+                <div class="grid gap-5 p-8 md:grid-cols-3">
+
+                    <div>
+
+                        <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
+                            Length
+                        </label>
+
+                        <input type="number"
+                               class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100" />
+
+                    </div>
+
+                    <div>
+
+                        <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
+                            Width
+                        </label>
+
+                        <input type="number"
+                               class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100" />
+
+                    </div>
+
+                    <div>
+
+                        <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
+                            Height
+                        </label>
+
+                        <input type="number"
+                               class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100" />
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ================================================== Exterior Features ================================================== -->
+
+            <section class="overflow-hidden rounded-[2rem] bg-white shadow-xl">
+
+                <div class="border-b border-zinc-200 bg-black px-8 py-6">
+
+                    <h2 class="text-3xl font-black text-white">
+                        Exterior Features
+                    </h2>
+
+                </div>
+
+                <div class="grid gap-5 p-8">
+
+                    <textarea rows="4"
+                              placeholder="Exterior Features"
+                              class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100"></textarea>
+
+                    <textarea rows="4"
+                              placeholder="Tire & Disk Wheel"
+                              class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100"></textarea>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ================================================== Interior Features ================================================== -->
+
+            <section class="overflow-hidden rounded-[2rem] bg-white shadow-xl">
+
+                <div class="border-b border-zinc-200 bg-black px-8 py-6">
+
+                    <h2 class="text-3xl font-black text-white">
+                        Interior Features
+                    </h2>
+
+                </div>
+
+                <div class="grid gap-5 p-8 md:grid-cols-2">
+
+                    <textarea rows="3" placeholder="Interior" class="rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100"></textarea>
+
+                    <textarea rows="3" placeholder="Meter Cluster" class="rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100"></textarea>
+
+                    <textarea rows="3" placeholder="Multi Info Display" class="rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100"></textarea>
+
+                    <textarea rows="3" placeholder="Audio" class="rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100"></textarea>
+
+                    <textarea rows="3" placeholder="Ignition" class="rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100"></textarea>
+
+                    <textarea rows="3" placeholder="Function" class="rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100"></textarea>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ================================================== Safety Features ================================================== -->
+
+            <section class="overflow-hidden rounded-[2rem] bg-white shadow-xl">
+
+                <div class="border-b border-zinc-200 bg-black px-8 py-6">
+
+                    <h2 class="text-3xl font-black text-white">
+                        Safety Features
+                    </h2>
+
+                </div>
+
+                <div class="grid gap-5 p-8">
+
+                    <textarea rows="4"
+                              placeholder="Safety Features"
+                              class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100"></textarea>
+
+                    <textarea rows="4"
+                              placeholder="Anti-lock Brake System"
+                              class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100"></textarea>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ================================================== Additional Information ================================================== -->
+
+            <section class="overflow-hidden rounded-[2rem] bg-white shadow-xl">
+
+                <div class="border-b border-zinc-200 bg-black px-8 py-6">
+
+                    <h2 class="text-3xl font-black text-white">
+                        Additional Information
+                    </h2>
+
+                </div>
+
+                <div class="grid gap-5 p-8">
+
+                    <!-- Single Disclaimer Only -->
+                    <textarea rows="4"
+                              placeholder="Additional Disclaimer"
+                              class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100"></textarea>
+
+                    <!-- Auto Date Posted -->
+                    <div class="rounded-2xl border border-zinc-200 bg-zinc-50 p-5">
+
+                        <p class="text-sm uppercase tracking-wide text-zinc-400">
+                            Date Posted
+                        </p>
+
+                        <h3 class="mt-2 text-lg font-bold text-zinc-900">
+                            Automatically Generated
+                        </h3>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- Submit -->
+            <div class="sticky bottom-6 z-50 flex justify-end">
+
+                <button type="submit"
+                        class="rounded-2xl bg-red-600 px-8 py-4 text-lg font-bold text-white shadow-2xl transition hover:scale-105 hover:bg-red-700">
+
+                    Save Vehicle
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
