@@ -11,6 +11,6 @@ namespace ToyotaMarketplace.Models.Vehicles.Specs
         public string FuelName { get; set; }
 
         // Navigation Property
-        public ICollection<VehicleTechnical> VehicleTechnicals { get; set; }
+        public ICollection<VehicleTechnical> VehicleTechnicals { get; set; } = new List<VehicleTechnical>();
     }
 }

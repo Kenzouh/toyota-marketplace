@@ -18,9 +18,13 @@ namespace ToyotaMarketplace.Models.Vehicles
         [ForeignKey("VehicleColor")]
         public int VehicleColorId { get; set; }
 
-        //[Required]
-        //[ForeignKey("VehicleSpec")]
-        //public int VehicleSpecId { get; set; }
+        [Required]
+        [ForeignKey("PowerTrain")]
+        public int PowerTrainId { get; set; }
+
+        [Required]
+        [ForeignKey("VehicleSpec")]
+        public int VehicleSpecId { get; set; }
 
         [Required]
         [ForeignKey("ToyotaAdmin")]
@@ -28,17 +32,11 @@ namespace ToyotaMarketplace.Models.Vehicles
         
         [Required]
         public string VehicleName { get; set; }
-
+           
         public int? VehicleSRP { get; set; }
 
         [Required]
         public string VehicleImg { get; set; }
-
-        [Required]
-        public bool IsElectric { get; set; }
-
-        [Required]
-        public bool IsHybrid { get; set; }
 
         [Required]
         public DateTime DatePosted { get; set; }
@@ -49,6 +47,7 @@ namespace ToyotaMarketplace.Models.Vehicles
         public VehicleColor VehicleColor { get; set; } // 1
 
         public VehicleSpec VehicleSpec { get; set; }
+        public PowerTrain PowerTrain { get; set; }
 
         // public VehicleSpec VehicleSpec { get; set; } // 1-to-1
 

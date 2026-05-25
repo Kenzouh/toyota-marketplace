@@ -17,7 +17,7 @@ namespace ToyotaMarketplace.Models.Vehicles.Specs
 
         public string Disclaimer { get; set; }
         public string ModelNote { get; set; }
-        public float GroundClearance { get; set; }
+        
 
         // Navigation property
         public Vehicle Vehicle { get; set; }

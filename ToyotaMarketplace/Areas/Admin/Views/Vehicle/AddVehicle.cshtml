@@ -65,7 +65,8 @@
 
                     <!-- Vehicle Image -->
                     <div class="space-y-2">
-
+                        
+                        <!-- VehicleImg -->
                         <label class="text-sm font-bold uppercase tracking-wide text-zinc-500">
                             Vehicle Images
                         </label>
@@ -87,9 +88,9 @@
                     <!-- Right Side -->
                     <div class="grid gap-5">
 
-                        <!-- Vehicle Name -->
                         <div>
 
+                            <!-- VehicleName -->
                             <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
                                 Vehicle Name
                             </label>
@@ -100,7 +101,7 @@
 
                         </div>
 
-                        <!-- Vehicle Type + Logos -->
+                        <!-- Vehicle Type -->
                         <div class="grid gap-5 md:grid-cols-2">
 
                             <div>
@@ -109,6 +110,7 @@
                                     Vehicle Type
                                 </label>
 
+                                <!-- VehicleType: retrieved from DB, and displayed -->
                                 <select class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none transition focus:border-red-500 focus:ring-4 focus:ring-red-100">
 
                                     <option>Select Vehicle Type</option>
@@ -122,18 +124,37 @@
 
                             <div>
 
+                                <!-- PowerTrainType -->
                                 <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
-                                    Logos
+                                    PowerTrain
                                 </label>
 
                                 <select class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none transition focus:border-red-500 focus:ring-4 focus:ring-red-100">
 
-                                    <option>Select Logo</option>
-                                    <option>Hybrid</option>
+                                    <option>Select PowerTrain</option>
+                                    <option>Gas</option>
                                     <option>Electric</option>
-                                    <option>GR</option>
+                                    <option>Hybrid</option>
 
                                 </select>
+
+                                <div>
+
+                                    <!-- FuelName -->
+                                    <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
+                                        Fuel Type
+                                    </label>
+
+                                    <select class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none transition focus:border-red-500 focus:ring-4 focus:ring-red-100">
+
+                                        <option>Select Fuel Type</option>
+                                        <option>Gasoline</option>
+                                        <option>Diesel</option>
+                                        <option>Premium</option>
+
+                                    </select>
+
+                                </div>
 
                             </div>
 
@@ -144,6 +165,7 @@
 
                             <div>
 
+                                <!-- Wheel -->
                                 <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
                                     Wheels
                                 </label>
@@ -156,6 +178,8 @@
 
                             <div>
 
+
+                                <!-- VehicleSRP -->
                                 <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
                                     SRP
                                 </label>
@@ -178,27 +202,97 @@
                             Available Colors
                         </label>
 
-                        <div class="flex flex-wrap gap-4 rounded-2xl border border-zinc-200 bg-zinc-50 p-5">
+                        <div class="flex items-center rounded-2xl border border-zinc-200 bg-zinc-50 overflow-hidden">
 
-                            <label class="flex items-center gap-2">
-                                <input type="checkbox" />
-                                <span>Black</span>
-                            </label>
+                            <!-- Left Arrow -->
+                            <button type="button"
+                                    class="flex h-16 w-16 items-center justify-center border-r border-zinc-200 text-2xl font-black text-zinc-500 transition hover:bg-zinc-100 hover:text-black">
 
-                            <label class="flex items-center gap-2">
-                                <input type="checkbox" />
-                                <span>White</span>
-                            </label>
+                                ‹
 
-                            <label class="flex items-center gap-2">
-                                <input type="checkbox" />
-                                <span>Red</span>
-                            </label>
+                            </button>
 
-                            <label class="flex items-center gap-2">
-                                <input type="checkbox" />
-                                <span>Blue</span>
-                            </label>
+                            <!-- Color Circles -->
+                            <div class="flex flex-1 items-center gap-4 overflow-x-auto px-6 py-4">
+
+                                <!-- Black -->
+                                <button type="button"
+                                        class="group relative h-12 w-12 rounded-full border-4 border-white bg-black shadow-lg transition hover:scale-125">
+
+                                    <span class="absolute inset-0 flex items-center justify-center text-white opacity-0 transition group-hover:opacity-100">
+
+                                        ✓
+
+                                    </span>
+
+                                </button>
+
+                                <!-- White -->
+                                <button type="button"
+                                        class="group relative h-12 w-12 rounded-full border border-zinc-300 bg-white shadow-lg transition hover:scale-125">
+
+                                    <span class="absolute inset-0 flex items-center justify-center text-black opacity-0 transition group-hover:opacity-100">
+
+                                        ✓
+
+                                    </span>
+
+                                </button>
+
+                                <!-- Red -->
+                                <button type="button"
+                                        class="group relative h-12 w-12 rounded-full bg-red-500 shadow-lg transition hover:scale-125">
+
+                                    <span class="absolute inset-0 flex items-center justify-center text-white opacity-0 transition group-hover:opacity-100">
+
+                                        ✓
+
+                                    </span>
+
+                                </button>
+
+                                <!-- Blue -->
+                                <button type="button"
+                                        class="group relative h-12 w-12 rounded-full bg-blue-500 shadow-lg transition hover:scale-125">
+
+                                    <span class="absolute inset-0 flex items-center justify-center text-white opacity-0 transition group-hover:opacity-100">
+
+                                        ✓
+
+                                    </span>
+
+                                </button>
+
+                            </div>
+
+                            <!-- Hexadecimal -->
+                            <div class="flex h-16 items-center border-l border-zinc-200 px-6">
+
+                                <span class="font-mono text-sm font-bold text-zinc-700">
+                                    #000000
+                                </span>
+
+                            </div>
+
+                            <!-- Plus Button -->
+                            <div class="border-l border-zinc-200">
+
+                                <button type="button"
+                                        class="flex h-16 w-16 items-center justify-center text-3xl font-light text-zinc-500 transition hover:bg-red-50 hover:text-red-600">
+
+                                    +
+
+                                </button>
+
+                            </div>
+
+                            <!-- Right Arrow -->
+                            <button type="button"
+                                    class="flex h-16 w-16 items-center justify-center border-l border-zinc-200 text-2xl font-black text-zinc-500 transition hover:bg-zinc-100 hover:text-black">
+
+                                ›
+
+                            </button>
 
                         </div>
 
@@ -237,6 +331,8 @@
 
                 <div class="grid gap-5 p-8 md:grid-cols-2">
 
+
+                    <!-- Engine -->
                     <div>
                         <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
                             Engine
@@ -246,6 +342,7 @@
                                class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100" />
                     </div>
 
+                    <!-- TransmissionName -->
                     <div>
                         <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
                             Transmission
@@ -261,6 +358,7 @@
                         </select>
                     </div>
 
+                    <!-- Drivetrain -->
                     <div>
                         <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
                             Drivetrain
@@ -270,6 +368,7 @@
                                class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100" />
                     </div>
 
+                    <!-- Chassis -->
                     <div>
                         <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
                             Chassis
@@ -279,6 +378,7 @@
                                class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100" />
                     </div>
 
+                    <!-- ModeName -->
                     <div class="md:col-span-2">
 
                         <label class="mb-3 block text-sm font-bold uppercase tracking-wide text-zinc-500">
@@ -331,12 +431,16 @@
 
                 <div class="grid gap-5 p-8 md:grid-cols-2">
 
+                    <!-- Suspension -->
                     <input type="text" placeholder="Suspension" class="rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100" />
 
+                    <!-- SteeringSystemName -->
                     <input type="text" placeholder="Steering System Name" class="rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100" />
 
+                    <!-- SteeringTypeName -->
                     <input type="text" placeholder="Steering Type Name" class="rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100" />
 
+                    <!-- PowerSteeringTypeName -->
                     <select class="rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100">
 
                         <option>Power Steering Type</option>
@@ -345,12 +449,16 @@
 
                     </select>
 
+                    <!-- FrontBrake -->
                     <input type="text" placeholder="Front Brake" class="rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100" />
 
+                    <!-- RearBrake -->
                     <input type="text" placeholder="Rear Brake" class="rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100" />
 
+                    <!-- MinimumTurningRadius -->
                     <input type="number" placeholder="Minimum Turning Radius" class="rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100" />
 
+                    <!-- BatteryName -->
                     <select class="rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100">
 
                         <option>Battery Type</option>
@@ -379,17 +487,7 @@
 
                 <div class="grid gap-5 p-8 md:grid-cols-3">
 
-                    <div>
-
-                        <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
-                            Length
-                        </label>
-
-                        <input type="number"
-                               class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100" />
-
-                    </div>
-
+                    <!-- DimensionX -->
                     <div>
 
                         <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
@@ -401,6 +499,7 @@
 
                     </div>
 
+                    <!-- DimensionY-->
                     <div>
 
                         <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
@@ -410,6 +509,55 @@
                         <input type="number"
                                class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100" />
 
+                    </div>
+
+                    <!-- DimensionZ -->
+                    <div>
+
+                        <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
+                            Length
+                        </label>
+
+                        <input type="number"
+                               class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100" />
+
+                    </div>
+
+                    <!-- GroundClearance -->
+                    <div>
+                        <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
+                            Ground Clearance
+                        </label>
+
+                        <input type="number"
+                            step="0.01"
+                            placeholder="198.50"
+                            class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100" />
+                    </div>
+
+                    <!-- SeatingCapacity -->
+                    <div>
+                        <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
+                            Seating Capacity
+                        </label>
+
+                        <input type="number" 
+                            step="0.01"
+                            placeholder="7.00"
+                            class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100"
+                            />
+                    </div>
+
+                    <!-- PayloadCapacity -->
+                    <div>
+                        <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
+                            Payload Capacity
+                        </label>
+
+                        <input type="number"
+                            step="0.01"
+                            placeholder="7.00"
+                            class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100"  />
                     </div>
 
                 </div>
@@ -432,10 +580,12 @@
 
                 <div class="grid gap-5 p-8">
 
+                    <!-- Exterior -->
                     <textarea rows="4"
                               placeholder="Exterior Features"
                               class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100"></textarea>
 
+                    <!-- TireDiskWheel -->
                     <textarea rows="4"
                               placeholder="Tire & Disk Wheel"
                               class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100"></textarea>
@@ -460,16 +610,22 @@
 
                 <div class="grid gap-5 p-8 md:grid-cols-2">
 
+                    <!-- Interior -->
                     <textarea rows="3" placeholder="Interior" class="rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100"></textarea>
 
+                    <!-- MeterCluster -->
                     <textarea rows="3" placeholder="Meter Cluster" class="rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100"></textarea>
 
+                    <!-- MultiInfoDisplay -->
                     <textarea rows="3" placeholder="Multi Info Display" class="rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100"></textarea>
 
+                    <!-- Audio -->
                     <textarea rows="3" placeholder="Audio" class="rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100"></textarea>
 
+                    <!-- Ignition -->
                     <textarea rows="3" placeholder="Ignition" class="rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100"></textarea>
 
+                    <!-- Function -->
                     <textarea rows="3" placeholder="Function" class="rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100"></textarea>
 
                 </div>
@@ -492,10 +648,12 @@
 
                 <div class="grid gap-5 p-8">
 
+                    <!-- Safety -->
                     <textarea rows="4"
                               placeholder="Safety Features"
                               class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100"></textarea>
 
+                    <!-- AntiLockBrakeSystem -->
                     <textarea rows="4"
                               placeholder="Anti-lock Brake System"
                               class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100"></textarea>
@@ -520,9 +678,9 @@
 
                 <div class="grid gap-5 p-8">
 
-                    <!-- Single Disclaimer Only -->
+                    <!-- ModelNote -->
                     <textarea rows="4"
-                              placeholder="Additional Disclaimer"
+                              placeholder="ModelNote"
                               class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100"></textarea>
 
                     <!-- Auto Date Posted -->

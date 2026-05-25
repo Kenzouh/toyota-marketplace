@@ -22,7 +22,7 @@ namespace ToyotaMarketplace.Models.Vehicles
 
         public VehicleColorCategory VehicleColorCategory { get; set; }
 
-        public ICollection<Vehicle> Vehicles { get; set; }
+        public ICollection<Vehicle> Vehicles { get; set; } = new List<Vehicle>();
 
         /*
             Visualization:
