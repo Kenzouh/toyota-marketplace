@@ -45,6 +45,8 @@ namespace ToyotaMarketplace.Areas.Data
         public DbSet<VehicleDimensionFuel> VehicleDimensionFuels { get; set; }
         public DbSet<VehicleFeature> VehicleFeatures { get; set; }
 
+        public DbSet<PowerTrain> PowerTrains { get; set; }
+
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -148,6 +150,14 @@ namespace ToyotaMarketplace.Areas.Data
                 .HasOne(vs => vs.VehicleFeature)
                 .WithOne(vf => vf.VehicleSpec)
                 .HasForeignKey<VehicleFeature>(vs => vs.FeatureId);
+
+            // ---
+
+            // 1:N Vehile -> PowerTrain
+            modelBuilder.Entity<Vehicle>()
+                .HasOne(v => v.PowerTrain)
+                .WithMany(pt => pt.Vehicles)
+                .HasForeignKey(v => v.PowerTrainId);
 
             // ------------------------------------------------------
 

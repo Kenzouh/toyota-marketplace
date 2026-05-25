@@ -19,6 +19,7 @@ namespace ToyotaMarketplace.Models.Vehicles.Specs
         // Navigation Properties
         public VehicleSpec VehicleSpec { get; set; }
 
+        public TransmissionType TransmissionType { get; set; }
         public ICollection<VehiclePerformanceDriveMode> VehiclePerformanceDriveModes { get; set; } = new List<VehiclePerformanceDriveMode>();
     }
 }

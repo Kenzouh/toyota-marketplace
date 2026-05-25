@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ToyotaMarketplace.Areas.Data;
 
@@ -11,9 +12,11 @@ using ToyotaMarketplace.Areas.Data;
 namespace ToyotaMarketplace.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260525051418_AddNavPropertyToTransmissionTypeInVehiclePerformanceTableAndVehicleSpecFKInVehicleTable")]
+    partial class AddNavPropertyToTransmissionTypeInVehiclePerformanceTableAndVehicleSpecFKInVehicleTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,7 +41,7 @@ namespace ToyotaMarketplace.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("ToyotaAdmins", (string)null);
+                    b.ToTable("ToyotaAdmins");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Users.User", b =>
@@ -74,7 +77,7 @@ namespace ToyotaMarketplace.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.BatteryType", b =>
@@ -91,7 +94,7 @@ namespace ToyotaMarketplace.Migrations
 
                     b.HasKey("BatteryTypeId");
 
-                    b.ToTable("BatteryTypes", (string)null);
+                    b.ToTable("BatteryTypes");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.BrakeType", b =>
@@ -112,7 +115,7 @@ namespace ToyotaMarketplace.Migrations
 
                     b.HasKey("BrakeTypeId");
 
-                    b.ToTable("BrakeTypes", (string)null);
+                    b.ToTable("BrakeTypes");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.DriveMode", b =>
@@ -129,7 +132,7 @@ namespace ToyotaMarketplace.Migrations
 
                     b.HasKey("DriveModeId");
 
-                    b.ToTable("DriveModes", (string)null);
+                    b.ToTable("DriveModes");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.FuelType", b =>
@@ -146,7 +149,7 @@ namespace ToyotaMarketplace.Migrations
 
                     b.HasKey("FuelTypeId");
 
-                    b.ToTable("FuelTypes", (string)null);
+                    b.ToTable("FuelTypes");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.PowerSteeringType", b =>
@@ -163,7 +166,7 @@ namespace ToyotaMarketplace.Migrations
 
                     b.HasKey("PowerSteeringTypeId");
 
-                    b.ToTable("PowerSteeringTypes", (string)null);
+                    b.ToTable("PowerSteeringTypes");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.PowerTrain", b =>
@@ -180,7 +183,7 @@ namespace ToyotaMarketplace.Migrations
 
                     b.HasKey("PowerTrainId");
 
-                    b.ToTable("PowerTrains", (string)null);
+                    b.ToTable("PowerTrains");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.SteeringSystem", b =>
@@ -197,7 +200,7 @@ namespace ToyotaMarketplace.Migrations
 
                     b.HasKey("SteeringSystemId");
 
-                    b.ToTable("SteeringSystems", (string)null);
+                    b.ToTable("SteeringSystems");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.SteeringType", b =>
@@ -214,7 +217,7 @@ namespace ToyotaMarketplace.Migrations
 
                     b.HasKey("SteeringTypeId");
 
-                    b.ToTable("SteeringTypes", (string)null);
+                    b.ToTable("SteeringTypes");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.TransmissionType", b =>
@@ -231,7 +234,7 @@ namespace ToyotaMarketplace.Migrations
 
                     b.HasKey("TransmissionTypeId");
 
-                    b.ToTable("TransmissionTypes", (string)null);
+                    b.ToTable("TransmissionTypes");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.VehicleDimensionFuel", b =>
@@ -262,7 +265,7 @@ namespace ToyotaMarketplace.Migrations
 
                     b.HasKey("DimensionFuelId");
 
-                    b.ToTable("VehicleDimensionFuels", (string)null);
+                    b.ToTable("VehicleDimensionFuels");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.VehicleFeature", b =>
@@ -308,7 +311,7 @@ namespace ToyotaMarketplace.Migrations
 
                     b.HasKey("FeatureId");
 
-                    b.ToTable("VehicleFeatures", (string)null);
+                    b.ToTable("VehicleFeatures");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.VehiclePerformance", b =>
@@ -335,7 +338,7 @@ namespace ToyotaMarketplace.Migrations
 
                     b.HasIndex("TransmissionTypeId");
 
-                    b.ToTable("VehiclePerformances", (string)null);
+                    b.ToTable("VehiclePerformances");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.VehiclePerformanceDriveMode", b =>
@@ -350,7 +353,7 @@ namespace ToyotaMarketplace.Migrations
 
                     b.HasIndex("DriveModeId");
 
-                    b.ToTable("VehiclePerformanceDriveModes", (string)null);
+                    b.ToTable("VehiclePerformanceDriveModes");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.VehicleSpec", b =>
@@ -380,7 +383,7 @@ namespace ToyotaMarketplace.Migrations
 
                     b.HasKey("VehicleSpecId");
 
-                    b.ToTable("VehicleSpecs", (string)null);
+                    b.ToTable("VehicleSpecs");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.VehicleTechnical", b =>
@@ -429,7 +432,7 @@ namespace ToyotaMarketplace.Migrations
 
                     b.HasIndex("SteeringTypeId");
 
-                    b.ToTable("VehicleTechnicals", (string)null);
+                    b.ToTable("VehicleTechnicals");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Vehicle", b =>
@@ -479,7 +482,7 @@ namespace ToyotaMarketplace.Migrations
 
                     b.HasIndex("VehicleModelId");
 
-                    b.ToTable("Vehicles", (string)null);
+                    b.ToTable("Vehicles");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.VehicleColor", b =>
@@ -505,7 +508,7 @@ namespace ToyotaMarketplace.Migrations
 
                     b.HasIndex("VehicleColorCategoryId");
 
-                    b.ToTable("VehicleColors", (string)null);
+                    b.ToTable("VehicleColors");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.VehicleColorCategory", b =>
@@ -522,7 +525,7 @@ namespace ToyotaMarketplace.Migrations
 
                     b.HasKey("VehicleColorCategoryId");
 
-                    b.ToTable("VehicleColorCategories", (string)null);
+                    b.ToTable("VehicleColorCategories");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.VehicleModel", b =>
@@ -544,7 +547,7 @@ namespace ToyotaMarketplace.Migrations
 
                     b.HasIndex("VehicleTypeId");
 
-                    b.ToTable("VehicleModels", (string)null);
+                    b.ToTable("VehicleModels");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.VehicleType", b =>
@@ -564,7 +567,7 @@ namespace ToyotaMarketplace.Migrations
 
                     b.HasKey("VehicleTypeId");
 
-                    b.ToTable("VehicleTypes", (string)null);
+                    b.ToTable("VehicleTypes");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Users.ToyotaAdmin", b =>
