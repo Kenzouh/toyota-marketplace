@@ -38,7 +38,7 @@ namespace ToyotaMarketplace.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("ToyotaAdmins", (string)null);
+                    b.ToTable("ToyotaAdmins");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Users.User", b =>
@@ -74,7 +74,7 @@ namespace ToyotaMarketplace.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.BatteryType", b =>
@@ -91,28 +91,7 @@ namespace ToyotaMarketplace.Migrations
 
                     b.HasKey("BatteryTypeId");
 
-                    b.ToTable("BatteryTypes", (string)null);
-                });
-
-            modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.BrakeType", b =>
-                {
-                    b.Property<int>("BrakeTypeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BrakeTypeId"));
-
-                    b.Property<string>("FrontBrake")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RearBrake")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("BrakeTypeId");
-
-                    b.ToTable("BrakeTypes", (string)null);
+                    b.ToTable("BatteryTypes");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.DriveMode", b =>
@@ -129,7 +108,24 @@ namespace ToyotaMarketplace.Migrations
 
                     b.HasKey("DriveModeId");
 
-                    b.ToTable("DriveModes", (string)null);
+                    b.ToTable("DriveModes");
+                });
+
+            modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.FrontBrakeType", b =>
+                {
+                    b.Property<int>("FrontBrakeTypeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FrontBrakeTypeId"));
+
+                    b.Property<string>("FrontBrakeName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("FrontBrakeTypeId");
+
+                    b.ToTable("FrontBrakeTypes");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.FuelType", b =>
@@ -146,7 +142,7 @@ namespace ToyotaMarketplace.Migrations
 
                     b.HasKey("FuelTypeId");
 
-                    b.ToTable("FuelTypes", (string)null);
+                    b.ToTable("FuelTypes");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.PowerSteeringType", b =>
@@ -163,7 +159,7 @@ namespace ToyotaMarketplace.Migrations
 
                     b.HasKey("PowerSteeringTypeId");
 
-                    b.ToTable("PowerSteeringTypes", (string)null);
+                    b.ToTable("PowerSteeringTypes");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.PowerTrain", b =>
@@ -180,7 +176,24 @@ namespace ToyotaMarketplace.Migrations
 
                     b.HasKey("PowerTrainId");
 
-                    b.ToTable("PowerTrains", (string)null);
+                    b.ToTable("PowerTrains");
+                });
+
+            modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.RearBrakeType", b =>
+                {
+                    b.Property<int>("RearBrakeTypeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RearBrakeTypeId"));
+
+                    b.Property<string>("RearBrakeName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("RearBrakeTypeId");
+
+                    b.ToTable("RearBrakeTypes");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.SteeringSystem", b =>
@@ -197,7 +210,7 @@ namespace ToyotaMarketplace.Migrations
 
                     b.HasKey("SteeringSystemId");
 
-                    b.ToTable("SteeringSystems", (string)null);
+                    b.ToTable("SteeringSystems");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.SteeringType", b =>
@@ -214,7 +227,7 @@ namespace ToyotaMarketplace.Migrations
 
                     b.HasKey("SteeringTypeId");
 
-                    b.ToTable("SteeringTypes", (string)null);
+                    b.ToTable("SteeringTypes");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.TransmissionType", b =>
@@ -231,13 +244,16 @@ namespace ToyotaMarketplace.Migrations
 
                     b.HasKey("TransmissionTypeId");
 
-                    b.ToTable("TransmissionTypes", (string)null);
+                    b.ToTable("TransmissionTypes");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.VehicleDimensionFuel", b =>
                 {
                     b.Property<int>("DimensionFuelId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DimensionFuelId"));
 
                     b.Property<float>("DimensionX")
                         .HasColumnType("real");
@@ -262,13 +278,16 @@ namespace ToyotaMarketplace.Migrations
 
                     b.HasKey("DimensionFuelId");
 
-                    b.ToTable("VehicleDimensionFuels", (string)null);
+                    b.ToTable("VehicleDimensionFuels");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.VehicleFeature", b =>
                 {
                     b.Property<int>("FeatureId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FeatureId"));
 
                     b.Property<string>("Audio")
                         .IsRequired()
@@ -308,13 +327,16 @@ namespace ToyotaMarketplace.Migrations
 
                     b.HasKey("FeatureId");
 
-                    b.ToTable("VehicleFeatures", (string)null);
+                    b.ToTable("VehicleFeatures");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.VehiclePerformance", b =>
                 {
                     b.Property<int>("PerformanceId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PerformanceId"));
 
                     b.Property<string>("Chassis")
                         .IsRequired()
@@ -335,7 +357,7 @@ namespace ToyotaMarketplace.Migrations
 
                     b.HasIndex("TransmissionTypeId");
 
-                    b.ToTable("VehiclePerformances", (string)null);
+                    b.ToTable("VehiclePerformances");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.VehiclePerformanceDriveMode", b =>
@@ -350,13 +372,16 @@ namespace ToyotaMarketplace.Migrations
 
                     b.HasIndex("DriveModeId");
 
-                    b.ToTable("VehiclePerformanceDriveModes", (string)null);
+                    b.ToTable("VehiclePerformanceDriveModes");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.VehicleSpec", b =>
                 {
                     b.Property<int>("VehicleSpecId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VehicleSpecId"));
 
                     b.Property<int?>("DimensionFuelId")
                         .HasColumnType("int");
@@ -380,13 +405,32 @@ namespace ToyotaMarketplace.Migrations
 
                     b.HasKey("VehicleSpecId");
 
-                    b.ToTable("VehicleSpecs", (string)null);
+                    b.HasIndex("DimensionFuelId")
+                        .IsUnique()
+                        .HasFilter("[DimensionFuelId] IS NOT NULL");
+
+                    b.HasIndex("FeatureId")
+                        .IsUnique()
+                        .HasFilter("[FeatureId] IS NOT NULL");
+
+                    b.HasIndex("PerformanceId")
+                        .IsUnique()
+                        .HasFilter("[PerformanceId] IS NOT NULL");
+
+                    b.HasIndex("TechnicalId")
+                        .IsUnique()
+                        .HasFilter("[TechnicalId] IS NOT NULL");
+
+                    b.ToTable("VehicleSpecs");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.VehicleTechnical", b =>
                 {
                     b.Property<int>("TechnicalId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TechnicalId"));
 
                     b.Property<string>("AntiLockBrakeSystem")
                         .IsRequired()
@@ -395,7 +439,7 @@ namespace ToyotaMarketplace.Migrations
                     b.Property<int?>("BatteryTypeId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("BrakeTypeId")
+                    b.Property<int?>("FrontBrakeTypeId")
                         .HasColumnType("int");
 
                     b.Property<int?>("FuelTypeId")
@@ -405,6 +449,9 @@ namespace ToyotaMarketplace.Migrations
                         .HasColumnType("real");
 
                     b.Property<int?>("PowerSteeringTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("RearBrakeTypeId")
                         .HasColumnType("int");
 
                     b.Property<int?>("SteeringSystemId")
@@ -419,17 +466,21 @@ namespace ToyotaMarketplace.Migrations
 
                     b.HasKey("TechnicalId");
 
-                    b.HasIndex("BrakeTypeId");
+                    b.HasIndex("BatteryTypeId");
+
+                    b.HasIndex("FrontBrakeTypeId");
 
                     b.HasIndex("FuelTypeId");
 
                     b.HasIndex("PowerSteeringTypeId");
 
+                    b.HasIndex("RearBrakeTypeId");
+
                     b.HasIndex("SteeringSystemId");
 
                     b.HasIndex("SteeringTypeId");
 
-                    b.ToTable("VehicleTechnicals", (string)null);
+                    b.ToTable("VehicleTechnicals");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Vehicle", b =>
@@ -479,7 +530,10 @@ namespace ToyotaMarketplace.Migrations
 
                     b.HasIndex("VehicleModelId");
 
-                    b.ToTable("Vehicles", (string)null);
+                    b.HasIndex("VehicleSpecId")
+                        .IsUnique();
+
+                    b.ToTable("Vehicles");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.VehicleColor", b =>
@@ -505,7 +559,7 @@ namespace ToyotaMarketplace.Migrations
 
                     b.HasIndex("VehicleColorCategoryId");
 
-                    b.ToTable("VehicleColors", (string)null);
+                    b.ToTable("VehicleColors");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.VehicleColorCategory", b =>
@@ -522,7 +576,7 @@ namespace ToyotaMarketplace.Migrations
 
                     b.HasKey("VehicleColorCategoryId");
 
-                    b.ToTable("VehicleColorCategories", (string)null);
+                    b.ToTable("VehicleColorCategories");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.VehicleModel", b =>
@@ -544,7 +598,7 @@ namespace ToyotaMarketplace.Migrations
 
                     b.HasIndex("VehicleTypeId");
 
-                    b.ToTable("VehicleModels", (string)null);
+                    b.ToTable("VehicleModels");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.VehicleType", b =>
@@ -564,7 +618,7 @@ namespace ToyotaMarketplace.Migrations
 
                     b.HasKey("VehicleTypeId");
 
-                    b.ToTable("VehicleTypes", (string)null);
+                    b.ToTable("VehicleTypes");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Users.ToyotaAdmin", b =>
@@ -578,36 +632,8 @@ namespace ToyotaMarketplace.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.VehicleDimensionFuel", b =>
-                {
-                    b.HasOne("ToyotaMarketplace.Models.Vehicles.Specs.VehicleSpec", "VehicleSpec")
-                        .WithOne("VehicleDimensionFuel")
-                        .HasForeignKey("ToyotaMarketplace.Models.Vehicles.Specs.VehicleDimensionFuel", "DimensionFuelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("VehicleSpec");
-                });
-
-            modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.VehicleFeature", b =>
-                {
-                    b.HasOne("ToyotaMarketplace.Models.Vehicles.Specs.VehicleSpec", "VehicleSpec")
-                        .WithOne("VehicleFeature")
-                        .HasForeignKey("ToyotaMarketplace.Models.Vehicles.Specs.VehicleFeature", "FeatureId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("VehicleSpec");
-                });
-
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.VehiclePerformance", b =>
                 {
-                    b.HasOne("ToyotaMarketplace.Models.Vehicles.Specs.VehicleSpec", "VehicleSpec")
-                        .WithOne("VehiclePerformance")
-                        .HasForeignKey("ToyotaMarketplace.Models.Vehicles.Specs.VehiclePerformance", "PerformanceId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("ToyotaMarketplace.Models.Vehicles.Specs.TransmissionType", "TransmissionType")
                         .WithMany()
                         .HasForeignKey("TransmissionTypeId")
@@ -615,8 +641,6 @@ namespace ToyotaMarketplace.Migrations
                         .IsRequired();
 
                     b.Navigation("TransmissionType");
-
-                    b.Navigation("VehicleSpec");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.VehiclePerformanceDriveMode", b =>
@@ -640,20 +664,41 @@ namespace ToyotaMarketplace.Migrations
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.VehicleSpec", b =>
                 {
-                    b.HasOne("ToyotaMarketplace.Models.Vehicles.Vehicle", "Vehicle")
+                    b.HasOne("ToyotaMarketplace.Models.Vehicles.Specs.VehicleDimensionFuel", "VehicleDimensionFuel")
                         .WithOne("VehicleSpec")
-                        .HasForeignKey("ToyotaMarketplace.Models.Vehicles.Specs.VehicleSpec", "VehicleSpecId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ToyotaMarketplace.Models.Vehicles.Specs.VehicleSpec", "DimensionFuelId");
 
-                    b.Navigation("Vehicle");
+                    b.HasOne("ToyotaMarketplace.Models.Vehicles.Specs.VehicleFeature", "VehicleFeature")
+                        .WithOne("VehicleSpec")
+                        .HasForeignKey("ToyotaMarketplace.Models.Vehicles.Specs.VehicleSpec", "FeatureId");
+
+                    b.HasOne("ToyotaMarketplace.Models.Vehicles.Specs.VehiclePerformance", "VehiclePerformance")
+                        .WithOne("VehicleSpec")
+                        .HasForeignKey("ToyotaMarketplace.Models.Vehicles.Specs.VehicleSpec", "PerformanceId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("ToyotaMarketplace.Models.Vehicles.Specs.VehicleTechnical", "VehicleTechnical")
+                        .WithOne("VehicleSpec")
+                        .HasForeignKey("ToyotaMarketplace.Models.Vehicles.Specs.VehicleSpec", "TechnicalId");
+
+                    b.Navigation("VehicleDimensionFuel");
+
+                    b.Navigation("VehicleFeature");
+
+                    b.Navigation("VehiclePerformance");
+
+                    b.Navigation("VehicleTechnical");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.VehicleTechnical", b =>
                 {
-                    b.HasOne("ToyotaMarketplace.Models.Vehicles.Specs.BrakeType", "BrakeType")
+                    b.HasOne("ToyotaMarketplace.Models.Vehicles.Specs.BatteryType", "BatteryType")
                         .WithMany("VehicleTechnicals")
-                        .HasForeignKey("BrakeTypeId");
+                        .HasForeignKey("BatteryTypeId");
+
+                    b.HasOne("ToyotaMarketplace.Models.Vehicles.Specs.FrontBrakeType", "FrontBrakeType")
+                        .WithMany("VehicleTechnicals")
+                        .HasForeignKey("FrontBrakeTypeId");
 
                     b.HasOne("ToyotaMarketplace.Models.Vehicles.Specs.FuelType", "FuelType")
                         .WithMany("VehicleTechnicals")
@@ -663,6 +708,10 @@ namespace ToyotaMarketplace.Migrations
                         .WithMany("VehicleTechnicals")
                         .HasForeignKey("PowerSteeringTypeId");
 
+                    b.HasOne("ToyotaMarketplace.Models.Vehicles.Specs.RearBrakeType", "RearBrakeType")
+                        .WithMany("VehicleTechnicals")
+                        .HasForeignKey("RearBrakeTypeId");
+
                     b.HasOne("ToyotaMarketplace.Models.Vehicles.Specs.SteeringSystem", "SteeringSystem")
                         .WithMany("VehicleTechnicals")
                         .HasForeignKey("SteeringSystemId");
@@ -671,31 +720,19 @@ namespace ToyotaMarketplace.Migrations
                         .WithMany("VehicleTechnicals")
                         .HasForeignKey("SteeringTypeId");
 
-                    b.HasOne("ToyotaMarketplace.Models.Vehicles.Specs.BatteryType", "BatteryType")
-                        .WithMany("VehicleTechnicals")
-                        .HasForeignKey("TechnicalId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ToyotaMarketplace.Models.Vehicles.Specs.VehicleSpec", "VehicleSpec")
-                        .WithOne("VehicleTechnical")
-                        .HasForeignKey("ToyotaMarketplace.Models.Vehicles.Specs.VehicleTechnical", "TechnicalId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("BatteryType");
 
-                    b.Navigation("BrakeType");
+                    b.Navigation("FrontBrakeType");
 
                     b.Navigation("FuelType");
 
                     b.Navigation("PowerSteeringType");
 
+                    b.Navigation("RearBrakeType");
+
                     b.Navigation("SteeringSystem");
 
                     b.Navigation("SteeringType");
-
-                    b.Navigation("VehicleSpec");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Vehicle", b =>
@@ -724,6 +761,12 @@ namespace ToyotaMarketplace.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ToyotaMarketplace.Models.Vehicles.Specs.VehicleSpec", "VehicleSpec")
+                        .WithOne("Vehicle")
+                        .HasForeignKey("ToyotaMarketplace.Models.Vehicles.Vehicle", "VehicleSpecId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("PowerTrain");
 
                     b.Navigation("ToyotaAdmin");
@@ -731,6 +774,8 @@ namespace ToyotaMarketplace.Migrations
                     b.Navigation("VehicleColor");
 
                     b.Navigation("VehicleModel");
+
+                    b.Navigation("VehicleSpec");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.VehicleColor", b =>
@@ -771,14 +816,14 @@ namespace ToyotaMarketplace.Migrations
                     b.Navigation("VehicleTechnicals");
                 });
 
-            modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.BrakeType", b =>
-                {
-                    b.Navigation("VehicleTechnicals");
-                });
-
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.DriveMode", b =>
                 {
                     b.Navigation("VehiclePerformanceDriveModes");
+                });
+
+            modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.FrontBrakeType", b =>
+                {
+                    b.Navigation("VehicleTechnicals");
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.FuelType", b =>
@@ -796,6 +841,11 @@ namespace ToyotaMarketplace.Migrations
                     b.Navigation("Vehicles");
                 });
 
+            modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.RearBrakeType", b =>
+                {
+                    b.Navigation("VehicleTechnicals");
+                });
+
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.SteeringSystem", b =>
                 {
                     b.Navigation("VehicleTechnicals");
@@ -806,27 +856,33 @@ namespace ToyotaMarketplace.Migrations
                     b.Navigation("VehicleTechnicals");
                 });
 
+            modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.VehicleDimensionFuel", b =>
+                {
+                    b.Navigation("VehicleSpec")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.VehicleFeature", b =>
+                {
+                    b.Navigation("VehicleSpec")
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.VehiclePerformance", b =>
                 {
                     b.Navigation("VehiclePerformanceDriveModes");
+
+                    b.Navigation("VehicleSpec")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.VehicleSpec", b =>
                 {
-                    b.Navigation("VehicleDimensionFuel")
-                        .IsRequired();
-
-                    b.Navigation("VehicleFeature")
-                        .IsRequired();
-
-                    b.Navigation("VehiclePerformance")
-                        .IsRequired();
-
-                    b.Navigation("VehicleTechnical")
+                    b.Navigation("Vehicle")
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Vehicle", b =>
+            modelBuilder.Entity("ToyotaMarketplace.Models.Vehicles.Specs.VehicleTechnical", b =>
                 {
                     b.Navigation("VehicleSpec")
                         .IsRequired();

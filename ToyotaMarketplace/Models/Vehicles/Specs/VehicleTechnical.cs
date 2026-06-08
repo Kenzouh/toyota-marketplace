@@ -12,7 +12,8 @@ namespace ToyotaMarketplace.Models.Vehicles.Specs
         public int? SteeringSystemId { get; set; }
         public int? SteeringTypeId { get; set; }
         public int? PowerSteeringTypeId { get; set; }
-        public int? BrakeTypeId { get; set;}
+        public int? FrontBrakeTypeId { get; set;}
+        public int? RearBrakeTypeId { get; set; }
         public int? FuelTypeId { get; set; }
 
 
@@ -27,7 +28,8 @@ namespace ToyotaMarketplace.Models.Vehicles.Specs
         public SteeringSystem SteeringSystem { get; set; }
         public SteeringType SteeringType { get; set; }
         public PowerSteeringType PowerSteeringType { get; set; }
-        public BrakeType BrakeType { get; set; }
+        public FrontBrakeType FrontBrakeType { get; set; }
+        public RearBrakeType RearBrakeType { get; set; }
         public FuelType FuelType { get; set; }  
     }
 }

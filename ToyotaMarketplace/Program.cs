@@ -49,6 +49,16 @@ using (var scope = app.Services.CreateScope())
     VehicleModelSeed.Seed(context);
     VehicleColorCategorySeed.Seed(context);
     VehicleColorSeed.Seed(context);
+
+    BatteryTypeSeed.Seed(context);
+    PowerTrainSeed.Seed(context);
+    FuelTypeSeed.Seed(context);
+    TransmissionTypeSeed.Seed(context);
+
+    FrontBrakeTypeSeed.Seed(context);
+    RearBrakeTypeSeed.Seed(context);
+    DriveModeSeed.Seed(context);
+    PowerSteeringTypeSeed.Seed(context);
 }
 
 
