@@ -3,16 +3,13 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 
 namespace ToyotaMarketplace.Models.Vehicles.Specs
 {
-    public class BrakeType
+    public class RearBrakeType
     {
         [Key]
-        public int BrakeTypeId { get; set; }
+        public int RearBrakeTypeId { get; set; }
 
         [Required]
-        public string FrontBrake { get; set; }
-
-        [Required]
-        public string RearBrake { get; set; }
+        public string RearBrakeName { get; set; }
 
         // Navigation Property
         public ICollection<VehicleTechnical> VehicleTechnicals { get; set; } = new List<VehicleTechnical>();

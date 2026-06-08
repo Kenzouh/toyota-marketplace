@@ -37,7 +37,9 @@ namespace ToyotaMarketplace.Areas.Data
         public DbSet<SteeringSystem> SteeringSystems { get; set; }
         public DbSet<SteeringType> SteeringTypes { get; set; }
         public DbSet<PowerSteeringType> PowerSteeringTypes { get; set; }
-        public DbSet<BrakeType> BrakeTypes { get; set; }
+        public DbSet<FrontBrakeType> FrontBrakeTypes { get; set; }
+        public DbSet<RearBrakeType> RearBrakeTypes { get; set; }
+ 
         public DbSet<FuelType> FuelTypes { get; set; }
 
         public DbSet<VehiclePerformance> VehiclePerformances { get; set; }
@@ -125,31 +127,25 @@ namespace ToyotaMarketplace.Areas.Data
             modelBuilder.Entity<Vehicle>()
                 .HasOne(v => v.VehicleSpec)
                 .WithOne(vs => vs.Vehicle)
-                .HasForeignKey<VehicleSpec>(v => v.VehicleSpecId);
-
-            // 1:1 VehicleSpec -> VehiclePerformance
-            modelBuilder.Entity<VehicleSpec>()
-                .HasOne(vs => vs.VehiclePerformance)
-                .WithOne(vp => vp.VehicleSpec)
-                .HasForeignKey<VehiclePerformance>(vs => vs.PerformanceId);
+                .HasForeignKey<Vehicle>(v => v.VehicleSpecId);
 
             // 1:1 VehicleSpec -> VehicleTechnical
             modelBuilder.Entity<VehicleSpec>()
                 .HasOne(vs => vs.VehicleTechnical)
                 .WithOne(vt => vt.VehicleSpec)
-                .HasForeignKey<VehicleTechnical>(vs => vs.TechnicalId);
+                .HasForeignKey<VehicleSpec>(vs => vs.TechnicalId);
 
             // 1:1 VehicleSpec -> VehicleDimensionFuel
             modelBuilder.Entity<VehicleSpec>()
                 .HasOne(vs => vs.VehicleDimensionFuel)
                 .WithOne(vdf => vdf.VehicleSpec)
-                .HasForeignKey<VehicleDimensionFuel>(vs => vs.DimensionFuelId);
+                .HasForeignKey<VehicleSpec>(vs => vs.DimensionFuelId);
 
             // 1:1 VehicleSpec -> VehicleFeature
             modelBuilder.Entity<VehicleSpec>()
                 .HasOne(vs => vs.VehicleFeature)
                 .WithOne(vf => vf.VehicleSpec)
-                .HasForeignKey<VehicleFeature>(vs => vs.FeatureId);
+                .HasForeignKey<VehicleSpec>(vs => vs.FeatureId);
 
             // ---
 
@@ -165,7 +161,7 @@ namespace ToyotaMarketplace.Areas.Data
             modelBuilder.Entity<VehicleTechnical>()
                 .HasOne(vt => vt.BatteryType)
                 .WithMany(bt => bt.VehicleTechnicals)
-                .HasForeignKey(vt => vt.TechnicalId);
+                .HasForeignKey(vt => vt.BatteryTypeId);
 
             // 1:N VehicleTechnical -> SteeringSystem
             modelBuilder.Entity<VehicleTechnical>()
@@ -185,11 +181,17 @@ namespace ToyotaMarketplace.Areas.Data
                 .WithMany(pst => pst.VehicleTechnicals)
                 .HasForeignKey(vt => vt.PowerSteeringTypeId);
 
-            // 1:N VehicleTechnical -> BrakeType
+            // 1:N VehicleTechnical -> FrontBrakeType
             modelBuilder.Entity<VehicleTechnical>()
-                .HasOne(vt => vt.BrakeType)
-                .WithMany(bt => bt.VehicleTechnicals)
-                .HasForeignKey(vt => vt.BrakeTypeId);
+                .HasOne(vt => vt.FrontBrakeType)
+                .WithMany(fbt => fbt.VehicleTechnicals)
+                .HasForeignKey(vt => vt.FrontBrakeTypeId);
+
+            // 1:N VehicleTechnical -> RearBrakeType
+            modelBuilder.Entity<VehicleTechnical>()
+                .HasOne(vt => vt.RearBrakeType)
+                .WithMany(rbt => rbt.VehicleTechnicals)
+                .HasForeignKey(vt => vt.RearBrakeTypeId);
         }
     }
 }
