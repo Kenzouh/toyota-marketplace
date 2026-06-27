@@ -1,5 +1,12 @@
-﻿@{
+﻿@model ToyotaMarketplace.Models.Vehicles.Vehicle
+
+@using System.Text.Json
+
+@{
     Layout = "_Layout";
+
+    var images = JsonSerializer.Deserialize<List<string>>(Model.VehicleImg ?? "[]");
+    var firstImage = images?.FirstOrDefault();
 }
 
 <div class="min-h-screen bg-zinc-100 py-10">
@@ -14,9 +21,10 @@
                 <!-- IMAGE -->
                 <div class="relative h-full">
 
-                    <img src="~/images/vehicles/sample-car.jpg"
-                         alt="Vehicle Image"
-                         class="h-full w-full object-cover lg:min-h-[500px]" />
+                    <!-- DB: VehicleImg -->
+                    <img src="@firstImage"
+                         alt="Vehicle Image" 
+                         class="h-full w-full object-contain lg:min-h-[500px]" />
 
                     <!-- Vehicle Number Badge (Top Left) -->
                     <div class="absolute left-6 top-6 flex items-center gap-3 rounded-full bg-black/60 px-4 py-2 text-white backdrop-blur-md">
@@ -25,6 +33,7 @@
                              class="h-5 w-5 invert"
                              alt="wheel icon" />
 
+                        <!-- DB: Wheel -->
                         <span class="text-sm font-bold tracking-widest">
                             4
                         </span>
@@ -37,13 +46,13 @@
                     <!-- Badges (Top Right) -->
                     <div class="absolute right-6 top-6 flex gap-3">
 
-                        <span class="rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-white shadow-lg">
-                            Hybrid
-                        </span>
+                        @* <span class="rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-white shadow-lg"> *@
+                        @*     Hybrid *@
+                        @* </span> *@
 
-                        <span class="rounded-full bg-sky-500 px-4 py-2 text-sm font-semibold text-white shadow-lg">
-                            Electric
-                        </span>
+                        @* <span class="rounded-full bg-sky-500 px-4 py-2 text-sm font-semibold text-white shadow-lg"> *@
+                        @*     Electric *@
+                        @* </span> *@
 
                     </div>
 
@@ -57,7 +66,7 @@
 
                         <!-- VehicleTypeName -->
                         <span class="rounded-full bg-red-100 px-4 py-1 text-sm font-semibold text-red-600">
-                            Gazoo Racing
+                            @Model.VehicleModel?.VehicleType?.VehicleTypeName
                         </span>
 
                         <!-- Warning Icon -->
@@ -67,10 +76,10 @@
                                  alt="Disclaimer"
                                  class="h-5 w-5 cursor-pointer text-yellow-500 transition hover:scale-110" />
 
-                            <!-- Tooltip (trim label): Disclaimer -->
+                            <!-- Tooltip (trim label): DB: Disclaimer -->
                             <div class="absolute left-1/2 top-7 z-50 hidden w-64 -translate-x-1/2 rounded-lg bg-zinc-900 px-3 py-2 text-xs text-white shadow-lg group-hover:block">
 
-                                Actual unit specifications may vary depending on region and model variant.
+                                @Model.VehicleSpec?.Disclaimer
 
                             </div>
 
@@ -78,32 +87,36 @@
 
                     </div>
 
-                    <!-- ModelName -->
+                    <!-- DB: ModelName -->
                     <h1 class="text-5xl font-black tracking-tight text-zinc-900">
-                        Toyota Vios
+                        @Model.VehicleModel?.ModelName
                     </h1>
 
-                    <!-- VehicleName -->
+                    <!-- DB: VehicleName -->
                     <p class="mt-2 text-lg font-medium text-zinc-500">
-                        2.5 Limited HEV CVT
+                        @Model.VehicleName
                     </p>
 
-                    <!-- Color Selector -->
+                    <!-- DB: VehicleColorName via VehicleColorId in Vehicles table -->
                     <div class="mt-4 flex items-center gap-3">
 
-                        <span class="text-sm text-zinc-500">Color:</span>
+                        <span class="text-sm font-semibold text-zinc-700">
+                            @Model.VehicleColor?.VehicleColorName
+                        </span>
                         
-                        <!-- VehicleColorName -->
+                        
+                        <!-- DB: VehicleColorName -->
+                        <!--
                         <button class="h-6 w-6 rounded-full bg-black ring-2 ring-transparent transition hover:scale-110 hover:ring-zinc-400"></button>
                         <button class="h-6 w-6 rounded-full bg-white border transition hover:scale-110 hover:ring-2 hover:ring-zinc-400"></button>
                         <button class="h-6 w-6 rounded-full bg-red-500 transition hover:scale-110 hover:ring-2 hover:ring-zinc-400"></button>
                         <button class="h-6 w-6 rounded-full bg-blue-500 transition hover:scale-110 hover:ring-2 hover:ring-zinc-400"></button>
-
+                        -->
                     </div>
 
-                    <!-- ModelNote -->
+                    <!-- DB: ModelNote -->
                     <p class="mt-5 text-lg leading-relaxed text-zinc-600">
-                        Experience performance, comfort, and innovation in one sleek package designed for modern driving.
+                        @Model.VehicleSpec.ModelNote
                     </p>
 
                     
@@ -113,9 +126,9 @@
                             Starting Price
                         </p>
 
-                        <!-- VehicleSRP -->
+                        <!-- DB: VehicleSRP. -->
                         <h2 class="mt-2 text-4xl font-extrabold text-green-600">
-                            ₱ 1,250,000
+                            ₱ @Model.VehicleSRP?.ToString("N0")
                         </h2>
 
                     </div>
@@ -183,9 +196,9 @@
                                 Engine
                             </p>
 
-                            <!-- Engine -->
+                            <!-- DB: Engine -->
                             <h3 class="mt-1 text-lg font-bold text-zinc-900">
-                                Engine: 1.5L Turbo Hybrid
+                                @Model.VehicleSpec?.VehiclePerformance?.Engine
                             </h3>
                         </div>
 
@@ -195,9 +208,9 @@
                                 Transmission
                             </p>
 
-                            <!-- Transmission -->
+                            <!-- DB: TransmissionName -->
                             <h3 class="mt-1 text-lg font-bold text-zinc-900">
-                                TransmissionName: CVT
+                                @Model.VehicleSpec?.VehiclePerformance?.TransmissionType?.TransmissionName
                             </h3>
                         </div>
 
@@ -206,18 +219,18 @@
                                 Drivetrain
                             </p>
 
-                            <!-- Drivetrain -->
+                            <!-- DB: Drivetrain -->
                             <h3 class="mt-1 text-lg font-bold text-zinc-900">
-                                Drivetrain: Front Wheel Drive (FWD) with Electronic Power Steering
+                                @Model.VehicleSpec?.VehiclePerformance?.Drivetrain
                             </h3>
                         </div>
 
                         <div class="rounded-2xl border border-zinc-200 bg-zinc-50 p-5">
                             <p class="text-sm uppercase tracking-wide text-zinc-400">
-                                Chassis
+                                @Model.VehicleSpec?.VehiclePerformance?.Chassis
                             </p>
 
-                            <!-- Chassis -->
+                            <!-- DB: Chassis -->
                             <h3 class="mt-1 text-lg font-bold text-zinc-900">
                                 Chassis: Turbo Charged, 3 Cylinders, Inline, 12-Valve DOHC VVT-i
                             </h3>
@@ -229,7 +242,27 @@
                                 Drive Modes
                             </p>
 
-                            <!-- ModeName -->
+                            <!-- DB: ModeName -->
+
+                            <div class="mt-3 flex flex-wrap gap-3">
+                                @foreach (var mode in Model.VehicleSpec.VehiclePerformance.VehiclePerformanceDriveModes)
+                                {
+                                    string badgeClass = mode.DriveMode.ModeName switch
+                                    {
+                                        "Eco" => "bg-emerald-100 text-emerald-700",
+                                        "Normal" => "bg-zinc-200 text-zinc-700",
+                                        "Sport" => "bg-orange-100 text-orange-700",
+                                        "EV" => "bg-sky-100 text-sky-700",
+                                        _ => "bg-gray-100 text-gray-700"
+                                    };
+
+                                    <span class="rounded-full px-4 py-2 text-sm font-semibold @badgeClass">
+                                        @mode.DriveMode.ModeName
+                                    </span>
+                                }
+                            </div>
+
+                            <!--
                             <div class="mt-3 flex flex-wrap gap-3">
 
                                 <span class="rounded-full bg-emerald-100 px-4 py-2 text-sm font-semibold text-emerald-700">
@@ -249,6 +282,7 @@
                                 </span>
 
                             </div>
+                            -->
 
                         </div>
 
@@ -289,58 +323,58 @@
 
                     <div class="grid gap-5 p-8 md:grid-cols-2">
 
-                        <!-- Suspension -->
+                        <!-- DB: Suspension -->
                         <div class="rounded-2xl border border-zinc-200 bg-zinc-50 p-5">
                             <p class="text-sm uppercase tracking-wide text-zinc-400">Suspension</p>
-                            <h3 class="mt-1 text-lg font-bold text-zinc-900">Suspension: MacPherson Strut</h3>
+                            <h3 class="mt-1 text-lg font-bold text-zinc-900">@Model.VehicleSpec?.VehicleTechnical?.Suspension</h3>
                         </div>
 
-                        <!-- SteeringSystemName -->
+                        <!-- DB: SteeringSystemName -->
                         <div class="rounded-2xl border border-zinc-200 bg-zinc-50 p-5">
                             <p class="text-sm uppercase tracking-wide text-zinc-400">Steering System</p>
-                            <h3 class="mt-1 text-lg font-bold text-zinc-900">SteeringSystemName: Magneto</h3>
+                            <h3 class="mt-1 text-lg font-bold text-zinc-900">@Model.VehicleSpec?.VehicleTechnical?.SteeringSystem?.SteeringSystemName</h3>
                         </div>
 
-                        <!-- SteeringTypeName -->
+                        <!-- DB: SteeringTypeName -->
                         <div class="rounded-2xl border border-zinc-200 bg-zinc-50 p-5">
                             <p class="text-sm uppercase tracking-wide text-zinc-400">Steering Type</p>
-                            <h3 class="mt-1 text-lg font-bold text-zinc-900">SteeringTypeName: Power Steering + Variable Flow Control</h3>
+                            <h3 class="mt-1 text-lg font-bold text-zinc-900">@Model.VehicleSpec?.VehicleTechnical?.SteeringType?.SteeringTypeName</h3>
                         </div>
 
-                        <!-- PowerSteeringTypeName -->
+                        <!-- DB: PowerSteeringTypeName -->
                         <div class="rounded-2xl border border-zinc-200 bg-zinc-50 p-5">
                             <p class="text-sm uppercase tracking-wide text-zinc-400">Power Steering</p>
-                            <h3 class="mt-1 text-lg font-bold text-zinc-900">PowerSteeringTypeName: Electronic</h3>
+                            <h3 class="mt-1 text-lg font-bold text-zinc-900">@Model.VehicleSpec?.VehicleTechnical?.PowerSteeringType?.PowerSteeringTypeName</h3>
                         </div>
 
-                        <!-- FrontBrake -->
+                        <!-- DB: FrontBrake -->
                         <div class="rounded-2xl border border-zinc-200 bg-zinc-50 p-5">
                             <p class="text-sm uppercase tracking-wide text-zinc-400">Front Brake</p>
-                            <h3 class="mt-1 text-lg font-bold text-zinc-900">FrontBrake: Ventilated Discs</h3>
+                            <h3 class="mt-1 text-lg font-bold text-zinc-900">@Model.VehicleSpec?.VehicleTechnical?.FrontBrakeType?.FrontBrakeName</h3>
                         </div>
 
-                        <!-- RearBrake -->
+                        <!-- DB: RearBrake -->
                         <div class="rounded-2xl border border-zinc-200 bg-zinc-50 p-5">
                             <p class="text-sm uppercase tracking-wide text-zinc-400">Rear Brake</p>
-                            <h3 class="mt-1 text-lg font-bold text-zinc-900">RearBrake: Drum</h3>
+                            <h3 class="mt-1 text-lg font-bold text-zinc-900">@Model.VehicleSpec?.VehicleTechnical?.RearBrakeType?.RearBrakeName</h3>
                         </div>
 
-                        <!-- AntiLockBrakeSystem -->
+                        <!-- DB: AntiLockBrakeSystem -->
                         <div class="rounded-2xl border border-zinc-200 bg-zinc-50 p-5">
                             <p class="text-sm uppercase tracking-wide text-zinc-400">ABS</p>
-                            <h3 class="mt-1 text-lg font-bold text-zinc-900">AntiLockBrakeSystem: With Brake Assist + EBD</h3>
+                            <h3 class="mt-1 text-lg font-bold text-zinc-900">@Model.VehicleSpec?.VehicleTechnical?.AntiLockBrakeSystem</h3>
                         </div>
 
-                        <!-- MinimumTurningRadius -->
+                        <!-- DB: MinimumTurningRadius -->
                         <div class="rounded-2xl border border-zinc-200 bg-zinc-50 p-5">
                             <p class="text-sm uppercase tracking-wide text-zinc-400">Turning Radius</p>
-                            <h3 class="mt-1 text-lg font-bold text-zinc-900">MinimumTurningRadius: 5.5m</h3>
+                            <h3 class="mt-1 text-lg font-bold text-zinc-900">@Model.VehicleSpec?.VehicleTechnical?.MinimumTurningRadius</h3>
                         </div>
 
-                        <!-- BatteryName -->
+                        <!-- DB: BatteryName -->
                         <div class="rounded-2xl border border-zinc-200 bg-zinc-50 p-5 md:col-span-2">
                             <p class="text-sm uppercase tracking-wide text-zinc-400">Battery</p>
-                            <h3 class="mt-1 text-lg font-bold text-zinc-900">BatteryName: Lithium Iron</h3>
+                            <h3 class="mt-1 text-lg font-bold text-zinc-900">@Model.VehicleSpec?.VehicleTechnical?.BatteryType?.BatteryName</h3>
                         </div>
 
                     </div>
@@ -380,36 +414,51 @@
 
                         <div class="rounded-2xl border border-zinc-200 bg-zinc-50 p-5">
                             <p class="text-sm uppercase tracking-wide text-zinc-400">Dimension</p>
+
+                            <!-- DB: DimensionX, DimensionY, Dimension Z -->
                             <h3 class="mt-1 text-lg font-bold text-zinc-900">
-                                4,425mm (L) × 1,730mm (W) × 1,475mm (H)
+                                @Model.VehicleSpec?.VehicleDimensionFuel?.DimensionZ mm (L)
+                                ×
+                                @Model.VehicleSpec?.VehicleDimensionFuel?.DimensionX mm (W)
+                                ×
+                                @Model.VehicleSpec?.VehicleDimensionFuel?.DimensionY mm (H)
                             </h3>
                         </div>
 
+
                         <div class="rounded-2xl border border-zinc-200 bg-zinc-50 p-5">
                             <p class="text-sm uppercase tracking-wide text-zinc-400">Ground Clearance</p>
+
+                            <!-- DB: GroundClearance -->
                             <h3 class="mt-1 text-lg font-bold text-zinc-900">
-                                175mm
+                                @Model.VehicleSpec?.VehicleDimensionFuel?.GroundClearance mm
                             </h3>
                         </div>
 
                         <div class="rounded-2xl border border-zinc-200 bg-zinc-50 p-5">
                             <p class="text-sm uppercase tracking-wide text-zinc-400">Seating Capacity</p>
+
+                            <!-- DB: SeatingCapacity -->
                             <h3 class="mt-1 text-lg font-bold text-zinc-900">
-                                3 Pax
+                                @Model.VehicleSpec?.VehicleDimensionFuel?.SeatingCapacity Pax
                             </h3>
                         </div>
 
                         <div class="rounded-2xl border border-zinc-200 bg-zinc-50 p-5">
                             <p class="text-sm uppercase tracking-wide text-zinc-400">Payload Capacity</p>
+
+                            <!-- DB: PayloadCapacity -->
                             <h3 class="mt-1 text-lg font-bold text-zinc-900">
-                                625KG with fully closed metal body for protection of packages
+                                @Model.VehicleSpec?.VehicleDimensionFuel?.PayloadCapacity KG
                             </h3>
                         </div>
 
                         <div class="rounded-2xl border border-zinc-200 bg-zinc-50 p-5 md:col-span-2">
                             <p class="text-sm uppercase tracking-wide text-zinc-400">Fuel Capacity</p>
+
+                            <!-- DB: FuelCapacity -->
                             <h3 class="mt-1 text-lg font-bold text-zinc-900">
-                                36L
+                                @Model.VehicleSpec?.VehicleDimensionFuel?.FuelCapacity L
                             </h3>
                         </div>
 
@@ -448,19 +497,19 @@
 
                     <div class="grid gap-5 p-8 md:grid-cols-2">
 
-                        <!-- Exterior -->
+                        <!-- DB: Exterior -->
                         <div class="rounded-2xl border border-zinc-200 bg-zinc-50 p-5 md:col-span-2">
                             <p class="text-sm uppercase tracking-wide text-zinc-400">Exterior</p>
                             <h3 class="mt-1 text-lg font-bold text-zinc-900">
-                                Two-tone body color, LED Headlamps with DRL accents
+                                @Model.VehicleSpec?.VehicleFeature?.Exterior
                             </h3>
                         </div>
 
-                        <!-- TireDiskWheel -->
+                        <!-- DB: TireDiskWheel -->
                         <div class="rounded-2xl border border-zinc-200 bg-zinc-50 p-5 md:col-span-2">
                             <p class="text-sm uppercase tracking-wide text-zinc-400">Tire & Wheel</p>
                             <h3 class="mt-1 text-lg font-bold text-zinc-900">
-                                195R14C Alloy Wheels with reinforced grip design
+                                @Model.VehicleSpec?.VehicleFeature?.TireDiskWheel
                             </h3>
                         </div>
 
@@ -499,51 +548,51 @@
 
                     <div class="grid gap-5 p-8 md:grid-cols-2">
 
-                        <!-- Interior -->
+                        <!-- DB: Interior -->
                         <div class="rounded-2xl border border-zinc-200 bg-zinc-50 p-5 md:col-span-2">
                             <p class="text-sm uppercase tracking-wide text-zinc-400">Interior</p>
                             <h3 class="mt-1 text-lg font-bold text-zinc-900">
-                                Premium Soft-Touch Cabin with Ambient Lighting
+                                @Model.VehicleSpec?.VehicleFeature?.Interior
                             </h3>
                         </div>
 
-                        <!-- MeterCluster -->
+                        <!-- DB: MeterCluster -->
                         <div class="rounded-2xl border border-zinc-200 bg-zinc-50 p-5">
                             <p class="text-sm uppercase tracking-wide text-zinc-400">Meter Cluster</p>
                             <h3 class="mt-1 text-lg font-bold text-zinc-900">
-                                Digital + Analog Hybrid Display
+                                @Model.VehicleSpec?.VehicleFeature?.MeterCluster
                             </h3>
                         </div>
 
-                        <!-- MultiInfo Display -->
+                        <!-- DB: MultiInfoDisplay -->
                         <div class="rounded-2xl border border-zinc-200 bg-zinc-50 p-5">
                             <p class="text-sm uppercase tracking-wide text-zinc-400">Multi-Info Display</p>
                             <h3 class="mt-1 text-lg font-bold text-zinc-900">
-                                12.3" Full Digital Smart Display
+                                @Model.VehicleSpec?.VehicleFeature?.MultiInfoDisplay
                             </h3>
                         </div>
 
-                        <!-- Audio -->
+                        <!-- DB: Audio -->
                         <div class="rounded-2xl border border-zinc-200 bg-zinc-50 p-5">
                             <p class="text-sm uppercase tracking-wide text-zinc-400">Audio System</p>
                             <h3 class="mt-1 text-lg font-bold text-zinc-900">
-                                9" Touch Display with Apple CarPlay & Android Auto
+                                @Model.VehicleSpec?.VehicleFeature?.Audio
                             </h3>
                         </div>
 
-                        <!-- Ignition -->
+                        <!-- DB: Ignition -->
                         <div class="rounded-2xl border border-zinc-200 bg-zinc-50 p-5">
                             <p class="text-sm uppercase tracking-wide text-zinc-400">Ignition</p>
                             <h3 class="mt-1 text-lg font-bold text-zinc-900">
-                                Smart Push Start System
+                                @Model.VehicleSpec?.VehicleFeature?.Ignition
                             </h3>
                         </div>
 
-                        <!-- Function -->
+                        <!-- DB: Function -->
                         <div class="rounded-2xl border border-zinc-200 bg-zinc-50 p-5 md:col-span-2">
                             <p class="text-sm uppercase tracking-wide text-zinc-400">Function</p>
                             <h3 class="mt-1 text-lg font-bold text-zinc-900">
-                                EPS Power Steering integrated with Push Start & Smart Drive Assist
+                                @Model.VehicleSpec?.VehicleFeature?.Function
                             </h3>
                         </div>
 
@@ -581,19 +630,19 @@
 
                     <div class="grid gap-5 p-8 md:grid-cols-2">
 
-                        <!-- Safety -->
+                        <!-- DB: Safety -->
                         <div class="rounded-2xl border border-zinc-200 bg-zinc-50 p-5 md:col-span-2">
                             <p class="text-sm uppercase tracking-wide text-zinc-400">Safety Suite</p>
                             <h3 class="mt-1 text-lg font-bold text-zinc-900">
-                                Toyota Safety Sense with Advanced Driver Assistance
+                                @Model.VehicleSpec?.VehicleFeature?.Safety
                             </h3>
                         </div>
 
-                        <!-- AntiLockBrakeSystem -->
+                        <!-- DB: AntiLockBrakeSystem -->
                         <div class="rounded-2xl border border-zinc-200 bg-zinc-50 p-5 md:col-span-2">
                             <p class="text-sm uppercase tracking-wide text-zinc-400">Brake System</p>
                             <h3 class="mt-1 text-lg font-bold text-zinc-900">
-                                Anti-lock Braking System (ABS) + Brake Assist + Electronic Brake-force Distribution (EBD)
+                                @Model.VehicleSpec?.VehicleTechnical?.AntiLockBrakeSystem
                             </h3>
                         </div>
 
@@ -632,19 +681,19 @@
                     <div class="grid gap-5 p-8 md:grid-cols-2">
 
 
-                        <!-- Disclaimer -->
+                        <!-- DB: Disclaimer -->
                         <div class="rounded-2xl border border-zinc-200 bg-zinc-50 p-5 md:col-span-2">
                             <p class="text-sm uppercase tracking-wide text-zinc-400">Disclaimer</p>
                             <h3 class="mt-1 text-lg font-bold text-zinc-900">
-                                Specifications may vary depending on model variant and region. Images shown are for illustration purposes only.
+                                @Model.VehicleSpec?.Disclaimer
                             </h3>
                         </div>
 
-                        <!-- DatePosted -->
+                        <!-- DB: DatePosted -->
                         <div class="rounded-2xl border border-zinc-200 bg-zinc-50 p-5 md:col-span-2">
                             <p class="text-sm uppercase tracking-wide text-zinc-400">Date Posted</p>
                             <h3 class="mt-1 text-lg font-bold text-zinc-900">
-                                September 13, 2025
+                                @Model.DatePosted.ToString("MMMM dd, yyyy")
                             </h3>
                         </div>
 

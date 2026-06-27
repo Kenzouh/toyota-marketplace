@@ -3,14 +3,14 @@
     var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
 }
 
-<nav class="bg-red-400 text-white">
+<nav class="bg-black text-white">
     <div class="max-w-7xl mx-auto px-4">
         <div class="flex items-center justify-between h-16">
 
             <!-- LEFT: Logo -->
             <div class="flex items-center">
                 <a asp-area="Public" asp-controller="Home" asp-action="Homepage">
-                    <img src="~/images/logos/Toyota.png" alt="Toyota Logo" class="h-10 w-auto">
+                    <img src="~/images/logos/Toyota White Logo.png" alt="Toyota Logo" class="h-10 w-auto">
                 </a>
             </div>
 
@@ -49,7 +49,7 @@
                         @Html.AntiForgeryToken()
 
                         <button type="submit"
-                                class="flex items-center gap-2 bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-800">
+                                class="flex items-center gap-2 bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-800">
 
                             <img src="~/icons/logout-icon.svg" class="w-5 h-5 text-white"/> Log out
                         </button>

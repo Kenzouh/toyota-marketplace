@@ -1,0 +1,468 @@
+[33mcommit 763960a385900ac6193a3d7aef5fa90d383b8eab[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Merge: d4866bb 74af2b0
+Author: Kenzo Ragundiaz（ラグンディアズ、賢三） <144200593+Kenzouh@users.noreply.github.com>
+Date:   Mon Jun 8 13:53:38 2026 +0800
+
+    feat(backend): add save function on add vehicle page and fix vehicle specs relationships (#13)
+    
+    feat(backend): add save function on add vehicle page
+    
+    ---
+    
+    # Added Files
+    
+    - Data/Seeds/BatteryTypeSeed.cs
+      - Seeded battery types.
+    
+    - Data/Seeds/DriveModeSeed.cs
+      - Seeded drive modes.
+    
+    - Data/Seeds/FrontBrakeTypeSeed.cs
+      - Seeded front brake types.
+    
+    - Data/Seeds/FuelTypeSeed.cs
+      - Seeded fuel types.
+    
+    - Data/Seeds/PowerSteeringTypeSeed.cs
+      - Seeded power steering types.
+    
+    - Data/Seeds/PowerTrainSeed.cs
+      - Seeded power trains.
+    
+    - Data/Seeds/RearBrakeTypeSeed.cs
+      - Seeded rear brake types.
+    
+    - Data/Seeds/TransmissionTypeSeed.cs
+      - Seeded transmission types.
+    
+    - Migrations
+      - `AddVehicleSpecsLookupTables.cs`: Added tons of tables and fixed relationships.
+    
+    - Models/Vehicles/Specs/FrontBrakeType.cs
+      - Added the properties:
+        - `FrontBrakeTypeId` (PK: int)
+        - `FrontBrakeName` (string)
+    
+    - Models/Vehicles/Specs/RearBrake.cs
+      - Added the properties:
+        - `RearBrakeTypeId` (PK: int)
+        - `RearBrakeName` (string)
+    
+    - Models/ViewModels/Admin/Vehicle/AddVehicleViewModel.cs
+      - Added the properties
+        - `VehicleName` (string)
+        - `VehicleSRP` (int)
+        - `VehicleTypeId` (FK: int)
+        - `VehicleModelId` (FK: int)
+        - `PowerTrainId` (FK: int)
+        - `FuelTypeId` (FK: int)
+        - `Wheel` (int)
+        - `Disclaimer` (string)
+        - `Engine` (string)
+        - `TransmissionTypeId` (FK: int)
+        - `Drivetrain` (string)
+        - `Chassis` (string)
+        - `Suspension` (string)
+        - `SteeringSystemName` (string)
+        - `SteeringTypeName` (string)
+        - `PowerSteeringTypeId` (FK: int)
+        - `FrontBrakeTypeId` (FK: int)
+        - `RearBrakeTypeId` (FK: int)
+        - `MinimumTurningRadius` (float)
+        - `BatteryTypeId` (FK: int)
+        - `AntiLockBrakeSystem` (string)
+        - `DimensionX` (float)
+        - `DimensionY` (float)
+        - `DimensionZ` (float)
+        - `GroundClearance` (float)
+        - `SeatingCapacity` (int)
+        - `PayloadCapacity` (float)
+        - `FuelCapacity` (float)
+        - `Exterior` (string)
+        - `TireDiskWheel` (string)
+        - `Interior` (string)
+        - `MeterCluster` (string)
+        - `MultiInfoDisplay` (string)
+        - `Audio` (string)
+        - `Ignition` (string)
+        - `Function` (string)
+        - `Safety` (string)
+        - `ModelNote` (string)
+      - Added these multiple lists
+        - `VehicleImages` (IFormFile)
+        - `VehicleColorIds` (int)
+        - `DriveModeIds` (int)
+      - Added dropdown data
+        - `VehicleTypes` (SelectListItem)
+        - `VehicleModels` (SelectListItem)
+        - `PowerTrains` (SelectListItem)
+        - `FuelTypes` (SelectListItem)
+        - `TransmissionTypes` (SelectListItem)
+        - `SteeringSystems` (SelectListItem)
+        - `SteeringTypes` (SelectListItem)
+        - `PowerSteeringTypes` (SelectListItem)
+        - `FrontBrakeTypes` (SelectListItem)
+        - `RearBrakeTypes` (SelectListItem)
+        - `BatteryTypes` (SelectListItem)
+        - `DriveModes` (SelectListItem)
+        - `VehicleColors` (SelectListItem)
+        - `VehicleColorCategories` (SelectListItem)
+    
+    - wwwroot/images/logos/Gazoo Racing.png
+      - Gazoo Racing Logo
+    
+    - wwwroot/uploads/images/Crossovers & SUVs/Land Cruiser Prado/2.4 Turbo A
+      - Tested uploading in the `Areas/Admin/Views/Vehicle/AddVehicle.cshtml` page.
+    
+    - wwwroot/uploads/images/Hatchbacks & Sedans/Vios/1.3 XE CVT
+      - Tested uploading in the `Areas/Admin/Views/Vehicle/AddVehicle.cshtml` page.
+    
+    - wwwroot/uploads/images/Hatchbacks & Sedans/Vios/1.3 XLE CVT
+      - Tested uploading in the `Areas/Admin/Views/Vehicle/AddVehicle.cshtml` page.
+    
+    - wwwroot/uploads/images/Hatchbacks & Sedans/Vios/Viosz
+      - Tested uploading in the `Areas/Admin/Views/Vehicle/AddVehicle.cshtml` page.
+    
+    ---
+    
+    # Modified Files
+    
+    - Areas/Admin/Controllers/VehicleController.cs
+      - Added and initialized `_context` and `_environment`.
+      - Displayed the dropdowns.
+      - Saved and filled up the DB tables.
+    
+    - Areas/Admin/Views/Vehicle/AddVehicle.cshtml
+      - Added backend configurations on these categories' and sections
+        - `Vehicle Hero Section`
+          - Vehicle Images (DB: `VehicleImg`)
+          - Vehicle Name (DB: `VehicleName`)
+          - Vehicle Type (DB: `VehicleTypeId`)
+          - Vehicle Model (DB: `VehicleModelId`)
+          - Powertrain (DB: `PowerTrainType`)
+          - Fuel Type (DB: `FuelName`)
+          - Wheels (DB: `Wheel`)
+          - SRP (DB: `VehicleSRP`)
+          - Available Colors (DB: `VehicleColorCategory` and `VehicleColorName`)
+          - Disclaimer (DB: `Disclaimer`)
+        - `Performance`
+          - Engine (DB: `Engine`)
+          - Transmission (DB: `TransimssionName`)
+          - Drivetrain (DB: `Drivetrain`)
+          - Chassis (DB: `Chasiss`)
+          - Drive Modes (DB: `ModeName`)
+        - `Technical Specifications`
+          - Suspension (DB: `Suspension`)
+          - Steering System Name (DB: `SteeringSystemName`)
+          - Steering Type Name (DB: `SteeringTypeName`)
+          - Power Steering Type (DB: `PowerSteeringTypeName`)
+          - Front Brake Type (DB: `FrontBrake`)
+          - Rear Brake Type (DB: `RearBrake`)
+          - Minimum Turning Radius (DB: `MinimumTurningRadius`)
+          - Battery Type (DB: `BatteryName`)
+        - `Dimensions & Capacity`
+          - Width (DB: `DimensionX`)
+          - Height (DB: `DimensionY`)
+          - Length (DB: `DimensionZ`)
+          - Ground Clearance (DB: `GroundClearance`)
+          - Seating Capacity (DB: `SeatingCapacity`)
+          - Payload Capacity (DB: `PayloadCapacity`)
+          - Fuel Capacity (Liters) (DB: `FuelCapacity`)
+        - `Exterior Features`
+          - Exterior (DB: `Exterior`)
+          - Tire Disk Wheel (DB: `TireDiskWheel`)
+        - `Interior Features
+          - Interior (DB: `Interior`)
+          - Meter Cluster (DB: `MeterCluster`)
+          - Multi Info Display (DB: `MultiInfoDisply`)
+          - Audio (DB: `Audio`)
+          - Ignition (DB: `Ignition`)
+          - Function (DB: `Function`)
+        - `Safety Features`
+          - Safety (DB: `Safety`)
+          - Anti Lock Brake System (DB: `AntiLockBrakeSystem`)
+        - `Additional Information`
+          - Model Note (DB: `ModelNote`)
+          - Date Posted (DB: `DatePosted`)
+    
+    - Data/ApplicationDbContext.cs
+      - Added DbSets
+        - `FrontBrakeTypes`
+        - `RearBrakeTypes`
+      - Fixed relationships.
+    
+    - Data/Seeds/VehicleColorSeed.cs
+      - Added hashtags on the `VehicleColorHexadecimal` for coloring the color selection in viewing, adding, and editing the vehicle colors.
+    
+    - Models/Vehicles/Specs/VehicleTechnical.cs
+      - Added these properties
+        - `FrontBrakeTypeId`
+        - `RearBrakeTypeId`
+      - Added these navigation properties
+        - `FrontBrakeType`
+          - `VehicleTechnicals` >o----|| `FrontBrakeTypes`
+        - `RearBrakeType`
+          - `VehicleTechnicals` >o----|| `RearBrakeTypes`
+    
+    - Program.cs
+      - Added these seeds
+        - `BatteryTypeSeed`
+        - `PowerTrainSeed`
+        - `FuelTypeSeed`
+        - `TransmissionTypeSeed`
+        - `FrontBrakeTypeSeed`
+        - `RearBrakeTypeSeed`
+        - `DriveModeSeed`
+        - `PowerSteeringTypeSeed`
+    
+    ---
+    
+    # Deleted Files
+    
+    - Migrations/20260506074021_AddVehicleSpecsLookupTables.Designer.cs
+    
+    - Migrations/20260506074021_AddVehicleSpecsLookupTables.cs
+    
+    - Migrations/20260520030805_RemoveDimensionAddDimensionXYZFields.Designer.cs
+    
+    - Migrations/20260520030805_RemoveDimensionAddDimensionXYZFields.cs
+    
+    - Migrations/20260522054602_AddPowerTrainsTable.Designer.cs
+    
+    - Migrations/20260522054602_AddPowerTrainsTable.cs
+    
+    - Migrations/20260525051418_AddNavPropertyToTransmissionTypeInVehiclePerformanceTableAndVehicleSpecFKInVehicleTable.Designer.cs
+    
+    - Migrations/20260525051418_AddNavPropertyToTransmissionTypeInVehiclePerformanceTableAndVehicleSpecFKInVehicleTable.cs
+    
+    - ToyotaMarketplace/Models/Vehicles/Specs/BrakeType.cs
+
+[33mcommit 74af2b0927810764c29ae99ffc4af7a1c4b45cf0[m[33m ([m[1;31morigin/backend/add-vehicle[m[33m, [m[1;32mbackend/add-vehicle[m[33m)[m
+Author: Kenzo Ragundiaz（ラグンディアズ、賢三） <kenzo.ragundiaz18@gmail.com>
+Date:   Mon Jun 8 13:39:21 2026 +0800
+
+    feat(backend): add save function on add vehicle page
+
+[33mcommit d4866bb8975fe6e4ae3346817552cd602b4778ea[m
+Merge: be89e18 35c4e09
+Author: Kenzo Ragundiaz（ラグンディアズ、賢三） <144200593+Kenzouh@users.noreply.github.com>
+Date:   Mon May 25 14:49:07 2026 +0800
+
+    feat(frontend): enhance add vehicle page UI (#12)
+    
+    feat(frontend): enhance add vehicle page
+    
+    ---
+    
+    # Added Files
+    
+    - Migrations
+      - AddPowerTrainsTable.cs
+      - AddNavPropertyToTransmissionTypeInVehiclePerformanceTableAndVehicleSpecFKInVehicleTable.cs
+    
+    - Models/Vehicles/Specs/PowerTrain.cs
+      - Added the properties:
+        - `PowerTrainId` (PK: int)
+        - `PowerTrainType` (string)
+      - Added navigation property to `Vehicle` model.
+    
+    ---
+    
+    # Modified Files:
+    
+    - Areas/Admin/Views/Vehicle/AddVehicle.cshtml
+      - Added comments for referencing fields in the DB.
+      - Added more fields
+        - `FuelName` (dropdown)
+        - `Color selection`
+        - `DimensionZ` (int textbox)
+        - `PayloadCapacity` (int textbox)
+    
+    - Data/ApplicationDbContext.cs
+      - Created DB table connection
+        - `Vehicle` >o----|| `PowerTrain`
+    
+    - Models/Vehicles/Specs/BatteryType.cs
+      - Initialized navigation property by adding `new List<VehicleTechnical>();` to `public ICollection<VehicleTechnical> VehicleTechnicals { get; set; }`.
+        - `public ICollection<VehicleTechnical> VehicleTechnicals { get; set; } = new List<VehicleTechnical>();`
+    
+    - Models/Vehicles/Specs/BrakeType.cs
+      - Initialized navigation property to `VehicleTechnical`.
+    
+    - Models/Vehicles/Specs/DriveMode.cs
+      - Initialized navigation property to `VehiclePerformanceDriveMode`.
+    
+    - Models/Vehicles/Specs/FuelType.cs
+      - Initialized navigation property to `VehicleTechnical`.
+    
+    - Models/Vehicles/Specs/PowerSteeringType.cs
+      - Initialized navigation property to `VehicleTechnical`.
+    
+    - Models/Vehicles/Specs/PowerSteeringType.cs
+      - Initialized navigation property to `VehicleTechnical`.
+    
+    - Models/Vehicles/Specs/PowerSteeringType.cs
+      - Initialized navigation property to `VehicleTechnical`.
+    
+    - Models/Vehicles/Specs/VehiclePerformance.cs
+      - Added navigation property to `TransmissionType`.
+        - `public TransmissionType TransmissionType { get; set; }`
+    
+    - Models/Vehicles/Specs/VehicleSpec.cs
+      - Removed `GroundClearance` and moved to
+    
+    - Models/Vehicles/Vehicle.cs
+      - Added navigation property to `PowerTrain`.
+    
+    - Models/Vehicles/VehicleColor.cs
+      - Initialized navigation property to `Vehicle`.
+
+[33mcommit 35c4e0978db8714ed5b8a78bfb94378dce7924bc[m[33m ([m[1;31morigin/frontend/add-vehicle-enhancement[m[33m, [m[1;32mfrontend/add-vehicle-enhancement[m[33m)[m
+Author: Kenzo Ragundiaz（ラグンディアズ、賢三） <kenzo.ragundiaz18@gmail.com>
+Date:   Mon May 25 14:47:03 2026 +0800
+
+    feat(frontend): enhance add vehicle page
+
+[33mcommit be89e18ca5b399080f8dfab8743bfa4a70009e91[m
+Merge: 407a133 187f58f
+Author: Kenzo Ragundiaz（ラグンディアズ、賢三） <144200593+Kenzouh@users.noreply.github.com>
+Date:   Thu May 21 15:42:36 2026 +0800
+
+    feat(frontend): add the add vehicle page and car SVG (#11)
+    
+    feat(frontend): add car SVG and add vehicle page
+    chore(db): add dimension x, y, z columns in VehicleDimensionFuels table
+    
+    ---
+    
+    # Added Files
+    
+    - Migration
+      - `RemoveDimensionAddDimensionXYZFields`: removed `Dimension` field, and replaced it with the fields `DimensionX`, `DimensionY`, and `DimensionZ`.
+    
+    - wwwroot/icons/car.svg
+      - Added a `car` SVG file.
+    
+    ---
+    
+    # Modified Files
+    
+    - Areas/Admin/Views/Vehicle/AddVehicle.cshtml
+      - Added a UI for adding a vehicle in the admin side. This includes these sections:
+        - `Vehicle Hero Section`
+        - `Performance`
+        - `Technical Specifications`
+        - `Dimensions & Capacity`
+        - `Exterior Features`
+        - `Interior Features`
+        - `Safety Features`
+        - `Additional Information`
+    
+    - Areas/Public/Views/Vehicle/ViewVehicle.cshtml
+      - Added comment       s for easier navigation once this page references the future `ViewModel` and for data retrieval.
+    
+    - Models/Vehicles/Specs/VehicleDimensionFuel.cs
+      - Removed the property:
+        - `Dimension` (string)
+      - Added the properties:
+        - `DimensionX` (float)
+        - `DimensionY` (float)
+        - `DimensionZ` (float)
+
+[33mcommit 187f58f68e02a73004810bdd16c42917d774925f[m[33m ([m[1;31morigin/frontend/add-vehicle[m[33m, [m[1;32mfrontend/add-vehicle[m[33m)[m
+Author: Kenzo Ragundiaz（ラグンディアズ、賢三） <kenzo.ragundiaz18@gmail.com>
+Date:   Thu May 21 15:39:25 2026 +0800
+
+    feat(frontend): add car SVG and add vehicle page
+    
+    chore(db): add dimension x, y, z columns in VehicleDimensionFuels table
+
+[33mcommit 407a133f4827c8d861b1c115568c0891f9306e32[m
+Merge: 46d1af8 d5f82fe
+Author: Kenzo Ragundiaz（ラグンディアズ、賢三） <144200593+Kenzouh@users.noreply.github.com>
+Date:   Thu May 14 16:57:02 2026 +0800
+
+    feat(frontend): add marketplace, view vehicle page, and sidebar (#10)
+    
+    feat(frontend): add marketplace and view vehicle page
+    
+    feat(frontend): add sidebar vehicle filter
+    
+    fix(backend): navbar highlighting and logic while in homepage
+    
+    ---
+    
+    # Added Files
+    
+    - Areas/Admin/Views/_ViewImports.cshtml
+      - Added `@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers` for validations, forms, links, and environment tags.
+    
+    - Areas/Admin/Views/_ViewStart.cshtml
+      - Referenced the `_Layout.cshtml` file for reusability.
+    
+    - Areas/Admin/Views/Vehicle/AddVehicle.cshtml
+      - Added a template for future coding.
+    
+    - Areas/Admin/Views/Vehicle/EditVehicle.cshtml
+      - Added a template for future coding.
+    
+    - Areas/Public/Controllers/VehicleController.cs
+      - Added `AddVehicle` and `EditVehicle` controller action methods.
+    
+    - Areas/Public/Views/Shared/_SidebarFilters.cshtml
+      - Added a sidebar with filters
+        - `Vehicle Type`
+        - `Price Range`
+        - `Seating Capacity`
+    
+    - Areas/Public/Views/Vehicle/ViewVehicle.cshtml
+      - Added a view page which contains vehicle information
+        - `Image`
+        - `Electric and hybrid badges`
+        - `Details`
+      - Added multiple accordions for a better UX.
+        - `Performance`
+        - `Technical Specifications`
+        - `Dimensions & Capacity`
+        - `Exterior Features`
+        - `Interior Features`
+        - `Safety Features`
+        - `Additional Information`
+    
+    - wwwroot/icons/down-arrow.svg
+      - Added a `down arrow` SVG file.
+    
+    - wwwroot/icons/warning.svg
+      - Added a `warning` SVG file.
+    
+    - wwwroot/icons/wheel.svg
+      - Added a `wheel` SVG file.
+    
+    - wwwroot/images/logos/HEV.png
+      - Added a `HEV` logo.
+    
+    - wwwroot/images/vehicles/sample-car.jpg
+      - Added a `sample car` image.
+    
+    ---
+    
+    # Modified Files
+    
+    - Areas/Public/Views/Home/Index.cshtml
+      - Display vehicle using cards.
+    
+    - Areas/Public/Views/Shared/_Navbar.cshtml
+      - Ensured that Home becomes unclickable and turns yellow if at the homepage.
+    
+    - Views/Shared/_Layout.cshtml
+      - Referenced `custom.css` and `site.css`.
+        '''
+            <!-- For custom CSS: validation styling -->
+            <link href="~/css/custom.css" rel="stylesheet" />
+            <!-- Tailwind CSS -->
+            <link href="~/css/site.css" rel="stylesheet" />
+        '''
+      - Rendered `body` and `scripts`.
+    
+    - Views/Shared/_Navbar.cshtml
+      - Ensured that `Home`, `Marketplace`, and `Contact Us` sections turn yellow and unclickable if the user is in those pages.

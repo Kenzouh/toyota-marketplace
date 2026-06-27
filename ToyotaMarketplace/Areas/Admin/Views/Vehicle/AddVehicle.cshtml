@@ -43,6 +43,8 @@
               enctype="multipart/form-data"
               class="space-y-8">
 
+              @Html.AntiForgeryToken()
+
             <!-- ================================================== Vehicle Hero Section ================================================== -->
 
             <section class="overflow-hidden rounded-[2rem] bg-white shadow-xl">
@@ -77,10 +79,10 @@
                                    class="w-full text-sm text-zinc-600" />
 
                             <p class="mt-3 text-sm text-zinc-400">
-                                Upload multiple vehicle images
+                                Upload a vehicle image
                             </p>
 
-                        </div>
+                        </div> 
 
                     </div>
 
@@ -91,18 +93,20 @@
 
                             <!-- VehicleName -->
                             <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
-                                Vehicle Name
+                                Vehicle Name <span class="text-red-500 text-sm">*</span>
                             </label>
+                            
 
                             <input asp-for="VehicleName",
                                    type="text"
                                    placeholder="Toyota Vios"
                                    class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none transition focus:border-red-500 focus:ring-4 focus:ring-red-100" />
 
+                            <span asp-validation-for="VehicleName" class="text-red-500 text-sm"></span>
                         </div>
 
                         <!-- Vehicle Type -->
-                        <div class="grid gap-5 md:grid-cols-3">
+                        <div class="grid gap-5 md:grid-cols-2">
 
                             <div>
 
@@ -122,9 +126,7 @@
 
                                 </select>
 
-                            </div>
-
-                            <div>
+                                <span asp-validation-for="VehicleTypeId" class="text-red-500 text-sm"></span>
 
                                 <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
                                     Vehicle Model
@@ -142,6 +144,7 @@
 
                                 </select>
 
+                                <span asp-validation-for="VehicleModelId" class="text-red-500 text-sm"></span>
                             </div>
 
                             <div>
@@ -161,6 +164,8 @@
 
                                 </select>
 
+                                <span asp-validation-for="PowerTrainId" class="text-red-500 text-sm"></span>
+
                                 <div>
 
                                     <!-- FuelName -->
@@ -175,6 +180,7 @@
                                         <option value="">Select Fuel Type</option>
 
                                     </select>
+
 
                                 </div>
 
@@ -375,6 +381,7 @@
 
                         <input asp-for="Engine"
                                type="text"
+                               placeholder="1KR-VE 3-cylinder, In-Line, 12-valve DOHC"
                                class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100" />
                     </div>
 
@@ -403,6 +410,7 @@
 
                         <input asp-for="Drivetrain"
                                type="text"
+                               placeholder="Front Wheel Drive (FWD) with Electronic Power Steering"
                                class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100" />
                     </div>
 
@@ -414,6 +422,7 @@
 
                         <input asp-for="Chassis"
                                type="text"
+                               placeholder="Double Wishbone with Stabilizer Bar (Front), Rigid Axle, Leaf Spring (Rear)"
                                class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100" />
                     </div>
 
@@ -472,62 +481,109 @@
                 <div class="grid gap-5 p-8 md:grid-cols-2">
 
                     <!-- Suspension -->
-                    <input asp-for="Suspension" type="text" placeholder="Suspension" class="rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100" />
+                    <div>
+                        <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
+                            Suspension
+                        </label>
+
+                        <input asp-for="Suspension" type="text" placeholder="Suspension" class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100" />
+                    </div>
 
                     <!-- SteeringSystemName -->
-                    <input asp-for="SteeringSystemName" type="text" placeholder="Steering System Name" class="rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100" />
+                    <div>
+                        <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
+                            Steering System
+                        </label>
+
+                        <input asp-for="SteeringSystemName" type="text" placeholder="Steering System Name" class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100" />
+                    </div>
 
                     <!-- SteeringTypeName -->
-                    <input asp-for="SteeringTypeName" type="text" placeholder="Steering Type Name" class="rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100" />
+                    <div>
+                        <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
+                            Steering Type
+                        </label>
+
+                        <input asp-for="SteeringTypeName" type="text" placeholder="Steering Type Name" class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100" />
+                    </div>
 
                     <!-- PowerSteeringTypeName -->
-                    <select 
-                        asp-for="PowerSteeringTypeId"
+                    <div>
+                        <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
+                            Power Steering Type
+                        </label>
+
+                        <select 
+                            asp-for="PowerSteeringTypeId"
 							asp-items="Model.PowerSteeringTypes"
-                        class="rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100">
+                            class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100">
 
-                        <option value="">Select Power Steering Type</option>
+                            <option value="">Select Power Steering Type</option>
 
-                    </select>
+                        </select>
+                    </div>
 
                     <!-- Front Brake -->
-                    <select asp-for="FrontBrakeTypeId"
-                            asp-items="Model.FrontBrakeTypes"
-                            class="rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100">
+                    <div>
+                        <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
+                            Front Brake
+                        </label>
 
-                        <option value="">
-                            Select Front Brake Type
-                        </option>
+                        <select asp-for="FrontBrakeTypeId"
+                                asp-items="Model.FrontBrakeTypes"
+                                class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100">
 
-                    </select>
+                            <option value="">
+                                Select Front Brake Type
+                            </option>
+
+                        </select>
+                    </div>
 
                     <!-- Rear Brake -->
-                    <select asp-for="RearBrakeTypeId"
-                            asp-items="Model.RearBrakeTypes"
-                            class="rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100">
+                    <div>
+                        <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
+                            Rear Brake
+                        </label>
 
-                        <option value="">
-                            Select Rear Brake Type
-                        </option>
+                        <select asp-for="RearBrakeTypeId"
+                                asp-items="Model.RearBrakeTypes"
+                                class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100">
 
-                    </select>
+                            <option value="">
+                                Select Rear Brake Type
+                            </option>
+
+                        </select>
+                    </div>
 
                     <!-- MinimumTurningRadius -->
-                    <input asp-for="MinimumTurningRadius"
-                           type="number"
-                           step="0.01"
-                           placeholder="Minimum Turning Radius"
-                           class="rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100" />
+                    <div>
+                        <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
+                            Minimum Turning Radius
+                        </label>
+
+                        <input asp-for="MinimumTurningRadius"
+                               type="number"
+                               step="0.01"
+                               placeholder="Minimum Turning Radius"
+                               class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100" />
+                    </div>
 
                     <!-- BatteryName -->
-                    <select asp-for="BatteryTypeId"
-                            asp-items="Model.BatteryTypes"
-                            class="rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100">
+                    <div>
+                        <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
+                            Battery Name
+                        </label>
 
-                        <option value="">Select Battery Type</option>
+                        <select asp-for="BatteryTypeId"
+                                asp-items="Model.BatteryTypes"
+                                class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100">
 
-                    </select>
+                            <option value="">Select Battery Type</option>
 
+                        </select>
+                    </div>
                 </div>
 
             </section>
@@ -659,17 +715,28 @@
                 <div class="grid gap-5 p-8">
 
                     <!-- Exterior -->
-                    <textarea asp-for="Exterior"
-                              placeholder="Exterior Features"
-                              rows="4"
-                              class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100"></textarea>
+                    <div>
+                        <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
+                            Exterior Features
+                        </label>
+
+                        <textarea asp-for="Exterior"
+                                  rows="4"
+                                  placeholder="Two-tone body color, LED Headlamps"
+                                  class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100"></textarea>
+                    </div>
 
                     <!-- TireDiskWheel -->
-                    <textarea asp-for="TireDiskWheel"
-                              placeholder="Tire Disk Wheel"
-                              rows="4"
-                              class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100"></textarea>
+                    <div>
+                        <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
+                            Tire Disk Wheel
+                        </label>
 
+                        <textarea asp-for="TireDiskWheel"
+                                  rows="4"
+                                  placeholder="195R14C With Foldable Bench Seats"
+                                  class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100"></textarea>
+                    </div>
                 </div>
 
             </section>
@@ -691,35 +758,70 @@
                 <div class="grid gap-5 p-8 md:grid-cols-2">
 
                     <!-- Interior -->
-                    <textarea asp-for="Interior"
-                              rows="3" placeholder="Interior" 
-                              class="rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100"></textarea>
+                    <div>
+                        <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
+                            Interior
+                        </label>
+
+                        <textarea asp-for="Interior"
+                                  rows="3" placeholder="Interior" 
+                                  class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100"></textarea>
+                    </div>
 
                     <!-- MeterCluster -->
-                    <textarea asp-for="MeterCluster"
-                              rows="3" placeholder="Meter Cluster" 
-                              class="rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100"></textarea>
+                    <div>
+                        <label class="w-full mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
+                            Meter Cluster
+                        </label>
+
+                        <textarea asp-for="MeterCluster"
+                                  rows="3" placeholder="Meter Cluster" 
+                                  class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100"></textarea>
+                    </div>
 
                     <!-- MultiInfoDisplay -->
-                    <textarea asp-for="MultiInfoDisplay" 
-                              rows="3" placeholder="Multi Info Display"
-                              class="rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100"></textarea>
+                    <div>
+                        <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
+                            Multi-Info Display
+                        </label>
+
+                        <textarea asp-for="MultiInfoDisplay" 
+                                  rows="3" placeholder="Multi Info Display"
+                                  class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100"></textarea>
+                    </div>
 
                     <!-- Audio -->
-                    <textarea asp-for="Audio" 
-                              rows="3" placeholder="Audio" 
-                              class="rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100"></textarea>
+                    <div>
+                        <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
+                            Audio
+                        </label>
+
+                        <textarea asp-for="Audio" 
+                                  rows="3" placeholder="Audio" 
+                                  class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100"></textarea>
+                    </div>
 
                     <!-- Ignition -->
-                    <textarea asp-for="Ignition" 
-                              rows="3" placeholder="Ignition" 
-                              class="rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100"></textarea>
+                    <div>
+                        <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
+                            Ignition
+                        </label>
+
+                        <textarea asp-for="Ignition" 
+                                  rows="3" placeholder="Ignition" 
+                                  class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100"></textarea>
+                    </div>
 
                     <!-- Function -->
-                    <textarea asp-for="Function" 
-                              rows="3" placeholder="Function" 
-                              class="rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100"></textarea>
+                    <div>
+                        <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
+                            Function
+                        </label>
 
+                        <textarea asp-for="Function" 
+                                  rows="3" placeholder="Function" 
+                                  class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100"></textarea>
+                    </div>
                 </div>
 
             </section>
@@ -741,16 +843,28 @@
                 <div class="grid gap-5 p-8">
 
                     <!-- Safety -->
-                    <textarea asp-for="Safety"
-                              placeholder="Safety"
-                              rows="4"
-                              class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100"></textarea>
+                    <div>
+                        <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
+                            Safety
+                        </label>
+
+                        <textarea asp-for="Safety"
+                                  placeholder="Safety"
+                                  rows="4"
+                                  class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100"></textarea>
+                    </div>
 
                     <!-- AntiLockBrakeSystem -->
-                    <textarea asp-for="AntiLockBrakeSystem"
-                              placeholder="Anti Lock Brake System"
-                              rows="4"
-                              class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100"></textarea>
+                    <div>
+                        <label class="mb-2 block text-sm font-bold uppercase tracking-wide text-zinc-500">
+                            Anti-Lock Brake System
+                        </label>
+
+                        <textarea asp-for="AntiLockBrakeSystem"
+                                  placeholder="Anti Lock Brake System"
+                                  rows="4"
+                                  class="w-full rounded-2xl border border-zinc-300 bg-zinc-50 px-5 py-4 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100"></textarea>
+                    </div>
                 </div>
 
             </section>

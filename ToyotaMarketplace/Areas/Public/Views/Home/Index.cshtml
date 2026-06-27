@@ -1,11 +1,13 @@
-﻿@{
+﻿@model ToyotaMarketplace.Models.ViewModels.Public.HomeViewModel
+
+@{
     Layout = "~/Areas/Public/Views/Shared/_Layout.cshtml";
 }
 
 <div class="flex gap-6">
 
     <!-- Left part: Sidebar -->
-    <partial name="_SidebarFilters" />
+    <partial name="_SidebarFilters" model="Model" />
 
     <!-- Right part: Main Content -->
     <div class="flex-1">
@@ -29,11 +31,44 @@
 
                 <h1 class="mr-4">Sort By:</h1>
 
-                <select class="border-2 rounded">
-                
-                    <option>Vehicle Name</option>
-                    <option>Starting Price</option>
-                </select>
+                <form method="get">
+
+                    <!-- Keep existing filters -->
+                    <input type="hidden"
+                           name="vehicleTypeId"
+                           value="@Context.Request.Query["vehicleTypeId"]" />
+
+                    <input type="hidden"
+                           name="seatingCapacity"
+                           value="@Context.Request.Query["seatingCapacity"]" />
+
+                    <input type="hidden"
+                           name="minPrice"
+                           value="@Context.Request.Query["minPrice"]" />
+
+                    <input type="hidden"
+                           name="maxPrice"
+                           value="@Context.Request.Query["maxPrice"]" />
+
+                    <select name="sortBy"
+                            class="border-2 rounded"
+                            onchange="this.form.submit()">
+
+                        <option value="">Default</option>
+
+                        <option value="name"
+                                selected="@(Context.Request.Query["sortBy"] == "name")">
+                            Vehicle Name (A-Z)
+                        </option>
+
+                        <option value="price"
+                                selected="@(Context.Request.Query["sortBy"] == "price")">
+                            Starting Price (Lowest)
+                        </option>
+
+                    </select>
+
+                </form>
 
             </div>
         </div>
@@ -41,35 +76,91 @@
         <!-- Vehicle Cards Section -->
         <div class="space-y-6">
 
-            <!-- Cards Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Vehicle Cards Section -->
+            <div class="space-y-6">
 
-                <!-- Card -->
-                <div class="bg-white rounded-lg shadow p-4">
-
-                    <!-- Logos Row -->
-                    <div class="flex justify-end items-center gap-2 bg-white rounded-lg ">
-                        <img src="~/images/logos/HEV.png" class="h-4 object-contain" />
-                        <img src="~/images/logos/Toyota.png" class="h-4 object-contain" />
+                @if (Model?.Vehicles == null || !Model.Vehicles.Any())
+                {
+                    <div class="text-center">
+                        <h2 class="text-2xl font-bold text-gray-500">
+                            No vehicles available :(
+                        </h2>
                     </div>
+                }
+                else
+                {
+                    <!-- Cards Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
 
-                    <!-- Car Image -->
-                    <img src="~/images/vehicles/sample-car.jpg" class="w-full h-40 object-cover rounded mb-3" />
-
-                    <hr />
-                    <!-- Car Info -->
-                    <h3 class="text-lg font-bold">Toyota Fortuner</h3>
-                    <h4 class="text-gray-400 mb-3">Starts at ₱1,800,000</h4>
-
-                    <div class="flex justify-between">
-                        <a asp-area="Public" asp-controller="Vehicle" asp-action="ViewVehicle" class="text-blue-500">View</a>
-
-                        @if (User.Identity != null && User.Identity.IsAuthenticated)
+                        @foreach (var vehicle in Model.Vehicles)
                         {
-                            <a asp-area="Admin" asp-controller="Vehicle" asp-action="EditVehicle" class="text-green-500">Edit</a>
+                            var images = System.Text.Json.JsonSerializer.Deserialize<List<string>>(vehicle.VehicleImg ?? "[]");
+                            var firstImage = images?.FirstOrDefault();
+
+                            <!-- Card -->
+                            <div class="bg-white rounded-lg shadow p-4">
+
+                                <!-- Logos Row -->
+                                <div class="flex justify-end items-center gap-2 bg-white rounded-lg">
+
+                                    @if (vehicle.VehicleModel?.VehicleType?.VehicleTypeName == "Electrified")
+                                    {
+                                        <img src="~/images/logos/HEV.png"
+                                             class="h-4 object-contain" />
+                                    }
+
+                                    @if (vehicle.VehicleModel?.VehicleType?.VehicleTypeName == "Gazoo Racing")
+                                    {
+                                        <img src="~/images/logos/Gazoo Racing.png"
+                                             class="h-4 object-contain" />
+                                    }
+
+                                </div>
+
+                                <!-- Vehicle Image -->
+                                <img src="@firstImage"
+                                     class="w-full h-40 object-contain rounded mb-3" />
+
+                                <hr />
+
+                                <!-- Vehicle Info -->
+                                <h3 class="text-lg font-bold">
+                                    @vehicle.VehicleModel?.ModelName
+                                </h3>
+
+                                <h4 class="text-gray-400 mb-3">
+                                    Starts at ₱@(vehicle.VehicleSRP?.ToString("N0"))
+                                </h4>
+
+                                <div class="flex justify-between">
+
+                                    <a asp-area="Public"
+                                       asp-controller="Vehicle"
+                                       asp-action="ViewVehicle"
+                                       asp-route-id="@vehicle.VehicleId"
+                                       class="text-blue-500">
+                                        View
+                                    </a>
+
+                                    @if (User.Identity != null && User.Identity.IsAuthenticated)
+                                    {
+                                        <a asp-area="Admin"
+                                           asp-controller="Vehicle"
+                                           asp-action="EditVehicle"
+                                           asp-route-id="@vehicle.VehicleId"
+                                           class="text-green-500">
+                                            Edit
+                                        </a>
+                                    }
+
+                                </div>
+
+                            </div>
                         }
+
                     </div>
-                </div>
+                }
+
             </div>
 
         </div>
